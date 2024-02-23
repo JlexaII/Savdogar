@@ -1,4 +1,4 @@
-<div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+<div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border border-info-subtle border-bottom bg-primary-subtle shadow-lg p-3 mb-5 bg-body-tertiary rounded">
     <a href="/" class="d-flex align-items-center link-body-emphasis text-decoration-none">
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="25" fill="currentColor" class="bi bi-gem"
             viewBox="0 0 16 16">
@@ -9,9 +9,10 @@
     </a>
 
     <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Home</a>
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">About</a>
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Contact</a>
-        <a class="py-2 link-body-emphasis text-decoration-none" href="#">Pricing</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{{ route('home') }}">Home</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{{ route('about') }}">About</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{{ route('contact') }}">Contact</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{{ route('contact-data') }}">Messages</a>
+        <a class="py-2 link-body-emphasis text-decoration-none" href="{{ route('price') }}">Pricing</a>
     </nav>
 </div>
