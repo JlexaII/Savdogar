@@ -26,5 +26,15 @@ Route::get(
     'ShowOneMessage']
 )->name('contact-data-one');
 
+Route::get(
+    '/contact/all/{id}/update', [ContactController::class,
+    'UpdateMessage']
+)->name('contact-update');
+
+Route::post(
+    '/contact/all/{id}/update', [ContactController::class,
+    'UpdateMessageSubmit']
+)->name('contact-update-submit');
+
 Route::get('/contact/all', [ContactController::class, 'allData'])->name('contact-data');
 Route::post('/contact/submit', [ContactController::class, 'submit'])->name('contact-form');
