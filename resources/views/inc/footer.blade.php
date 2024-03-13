@@ -40,46 +40,36 @@
 </footer>
 
 <div class="d-inline-flex d-lg-none">
-  <ul class="nav nav-pills mb-auto">
-    <li class="nav-item">
-        <a href="{{ route('home') }}" class="nav-link active" aria-current="page">
-            <svg class="bi pe-none me-2" width="16" height="16">
-                <use xlink:href="#home" />
-            </svg>
-            Главное
-        </a>
-    </li>
-    <li>
-        <a href="#" class="nav-link link-dark">
-            <svg class="bi pe-none me-2" width="16" height="16">
-                <use xlink:href="#speedometer2" />
-            </svg>
-            Отчёт
-        </a>
-    </li>
-    <li>
-        <a href="#" class="nav-link link-dark">
-            <svg class="bi pe-none me-2" width="16" height="16">
-                <use xlink:href="#table" />
-            </svg>
-            Продукты
-        </a>
-    </li>
-    <li>
-        <a href="#" class="nav-link link-dark">
-            <svg class="bi pe-none me-2" width="16" height="16">
-                <use xlink:href="#grid" />
-            </svg>
-            Покупатели
-        </a>
-    </li>
-    <li>
-        <a href="#" class="nav-link link-dark">
-            <svg class="bi pe-none me-2" width="16" height="16">
-                <use xlink:href="#people-circle" />
-            </svg>
-            Заявка
-        </a>
-    </li>
-</ul>
+    <ul class="nav nav-pills mb-auto">
+        <li class="nav-item">
+            <a href="{{ route('home') }}" class="btn btn-info">
+
+                Главное
+            </a>
+        </li>
+        <li>
+            <a href="#" class="btn btn-info">
+
+                Отчёт
+            </a>
+        </li>
+        <li>
+            <a href="#" class="btn btn-info">
+
+                Продукты
+            </a>
+        </li>
+        <li>
+            <a href="#" class="btn btn-info">
+
+                Покупатели
+            </a>
+        </li>
+        <li>
+            <a href="#" class="btn btn-info">
+
+                Заявка
+            </a>
+        </li>
+    </ul>
 </div>
