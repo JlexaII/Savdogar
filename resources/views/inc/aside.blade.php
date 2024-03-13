@@ -2,12 +2,12 @@
 
     <div class="aside">
 
-        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
+        <div class="d-none d-lg-block d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                 <svg class="bi pe-none me-2" width="40" height="32">
                     <use xlink:href="#bootstrap" />
                 </svg>
-                <span class="fs-4">Sidebar</span>
+                <span class="fs-4">Выберите</span>
             </a>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
@@ -16,7 +16,7 @@
                         <svg class="bi pe-none me-2" width="16" height="16">
                             <use xlink:href="#home" />
                         </svg>
-                        Home
+                        Главное
                     </a>
                 </li>
                 <li>
@@ -24,7 +24,7 @@
                         <svg class="bi pe-none me-2" width="16" height="16">
                             <use xlink:href="#speedometer2" />
                         </svg>
-                        Dashboard
+                        Отчёт
                     </a>
                 </li>
                 <li>
@@ -32,7 +32,7 @@
                         <svg class="bi pe-none me-2" width="16" height="16">
                             <use xlink:href="#table" />
                         </svg>
-                        Orders
+                        Продукты
                     </a>
                 </li>
                 <li>
@@ -40,7 +40,7 @@
                         <svg class="bi pe-none me-2" width="16" height="16">
                             <use xlink:href="#grid" />
                         </svg>
-                        Products
+                        Покупатели
                     </a>
                 </li>
                 <li>
@@ -48,7 +48,7 @@
                         <svg class="bi pe-none me-2" width="16" height="16">
                             <use xlink:href="#people-circle" />
                         </svg>
-                        Customers
+                        Заявка
                     </a>
                 </li>
             </ul>

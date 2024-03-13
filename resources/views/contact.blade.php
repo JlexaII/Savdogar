@@ -1,30 +1,30 @@
 @extends('layouts.app')
 
 @section('title-block')
-    Contact
+    Контакт
 @endsection
 
 @section('content')
-    <h1>Contact numbers</h1>
+    <h1>Контактный номер</h1>
 
     <form action="{{ route('contact-form') }}" method="post">
         @csrf
         <div class="form-group">
-            <label for="name">Enter name</label>
-            <input type="text" class="form-control" name="name" placeholder="Enter name" id="name">
+            <label for="name">Имя</label>
+            <input type="text" class="form-control" name="name" placeholder="Введите имя" id="name">
         </div>
         <div class="form-group">
-            <label for="email">Enter email</label>
-            <input type="text" class="form-control" name="email" placeholder="Enter email" id="email">
+            <label for="email">Электронная почта</label>
+            <input type="text" class="form-control" name="email" placeholder="Введите почту" id="email">
         </div>
         <div class="form-group">
-            <label for="subject">Subject</label>
-            <input type="text" class="form-control" name="subject" placeholder="topic text" id="subject">
+            <label for="subject">Тема</label>
+            <input type="text" class="form-control" name="subject" placeholder="тема" id="subject">
         </div>
         <div class="form-group">
-            <label for="message">Text message</label>
-            <textarea name="message" id="message" class="form-control" placeholder="Enter message"></textarea>
+            <label for="message">Текст сообщения</label>
+            <textarea name="message" id="message" class="form-control" placeholder="Введите текст"></textarea>
         </div>
-        <button type="submit" class="btn btn-success">Send message</button>
+        <button type="submit" class="btn btn-success">Отправить сообщение</button>
     </form>
 @endsection

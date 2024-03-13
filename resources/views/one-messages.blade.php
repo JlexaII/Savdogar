@@ -11,7 +11,7 @@
             <p>{{ $data->message }}</p>      
             <p>{{ $data->email }} - {{ $data->name }}</p>
             <p><small>{{ $data->created_at }}</small></p>
-            <a href="{{ route('contact-update', $data->id) }}"><button class="btn btn-info">Update</button></a>
+            <a href="{{ route('contact-update', $data->id) }}"><button class="btn btn-info">Изменить</button></a>
         </div>
     
 @endsection

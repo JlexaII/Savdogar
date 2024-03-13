@@ -1,14 +1,15 @@
 @extends('layouts.app')
 
 @section('title-block')
-    Company info
+    О нас
 @endsection
 
 @section('content')
-    <h1 class="p-3">What does the company represent today?</h1>
-    <h3>The company was created to trade various goods and services on the market of Uzbekistan. The main activity is
-        related to the provision of office equipment repair services. But over time, the company has come to the conclusion
-        that the market needs suppliers of technical equipment and today is ready to cooperate with all interested
-        organizations and manufacturers in the production of spare parts. Manufacturers of agricultural machinery and more,
-        also manufacturers of spare parts for agricultural machinery.</h3>
+    <h1 class="p-3">Есть ли вопросы о компании?</h1>
+    <h3>"Наша компания специализируется на продаже высококачественных фрезерных станков с числовым программным управлением
+        (ЧПУ), предназначенных для обработки различных материалов. Мы предлагаем широкий выбор станков различной
+        производительности и функциональности, отвечающих потребностям различных отраслей промышленности. Наши продукты
+        отличаются надежностью, точностью и инновационными технологиями, что позволяет нашим клиентам повысить
+        производительность и качество своей продукции. Мы также предлагаем консультации по выбору оборудования и обучение по
+        его эксплуатации, обеспечивая полную поддержку нашим клиентам в процессе сотрудничества."</h3>
 @endsection
