@@ -5,9 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="CNC machine ЧПУ станок резка металла станки для лазерной резки оборудование фрейзер металл дерево Фрезерные станки с ЧПУ">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url('/') }}/css/style.css">
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">    
     <title>@yield('title-block')</title>
 </head>
 
@@ -20,12 +22,12 @@
     <div class="container mt-5">
         @include('inc.message')
         <div class="row">
-            <div class="col-8">
+            <div>
                 @yield('content')
             </div>
-            <div class="col-4">
+            {{-- <div class="col-4 d-none d-lg-block">
                 @include('inc.aside')
-            </div>
+            </div> --}}
         </div>
     </div>
     <div class="d-block">
