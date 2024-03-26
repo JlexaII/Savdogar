@@ -1,4 +1,4 @@
-<div class="jumbotron">
+<div class="jumbotron p-5">
     <div class="container">
         <h1>Добро пожаловать на страницу компании ООО "AXMEDOV'S".</h1>
         <p  align="justify">Сегодня наша цель – развитие процесса сотрудничества и начало деловых отношений с соседними странами.
