@@ -16,9 +16,13 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
-Route::get('/price', function () {
+Route::get('/prj', function () {
     return view('pricing');
 })->name('price');
+
+Route::get('/blog', function () {
+    return view('blog');
+})->name('blog');
 
 
 Route::get(
