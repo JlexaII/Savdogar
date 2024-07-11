@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Auth\SocialController;
 
 
 Route::get('/', function () {
@@ -42,3 +43,6 @@ Route::post(
 
 Route::get('/contact/all', [ContactController::class, 'allData'])->name('contact-data');
 Route::post('/contact/submit', [ContactController::class, 'submit'])->name('contact-form');
+
+Route::get('auth/{provider}', [SocialController::class, 'redirectToProvider']);
+Route::get('auth/{provider}/callback', [SocialController::class, 'handleProviderCallback']);
