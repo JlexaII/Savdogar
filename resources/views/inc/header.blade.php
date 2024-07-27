@@ -31,10 +31,10 @@
                     <a class="me-3 py-2 link-body-emphasis text-decoration-none"
                         href="{{ route('contact') }}">Контакт</a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="me-3 py-2 link-body-emphasis text-decoration-none"
                         href="{{ route('contact-data') }}">Сообщения</a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a class="me-3 py-3 link-body-emphasis text-decoration-none" href="{{ route('price') }}">Проекты</a>
                 </li>

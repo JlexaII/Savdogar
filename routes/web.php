@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Auth\SocialController;
-
+use App\Http\Controllers\SubscriptionController;
 
 Route::get('/', function () {
     return view('home');
@@ -32,7 +32,7 @@ Route::get(
 )->name('contact-data-one');
 
 Route::get(
-    '/contact/all/{id}/update', [ContactController::class,
+    '/contact/alls/{id}/update', [ContactController::class,
     'UpdateMessage']
 )->name('contact-update');
 
@@ -46,3 +46,4 @@ Route::post('/contact/submit', [ContactController::class, 'submit'])->name('cont
 
 Route::get('auth/{provider}', [SocialController::class, 'redirectToProvider']);
 Route::get('auth/{provider}/callback', [SocialController::class, 'handleProviderCallback']);
+Route::post('/subscribe', [SubscriptionController::class, 'subscribe'])->name('subscribe');
