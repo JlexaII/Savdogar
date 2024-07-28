@@ -30,3 +30,12 @@ Route::prefix('auth')->group(function () {
 
 // Подписка
 Route::post('/subscribe', [SubscriptionController::class, 'subscribe'])->name('subscribe');
+
+
+Route::get('/privacy', function () {
+    return view('privacy');
+})->name('privacy');
+
+Route::get('/terms', function () {
+    return view('terms');
+})->name('terms');
