@@ -9,3 +9,7 @@ body {
     color: #000;
     /* Цвет текста при наведении */
 }
+
+.bg-dark-blue {
+    background-color: #001f3f; /* Темно-синий цвет */
+}

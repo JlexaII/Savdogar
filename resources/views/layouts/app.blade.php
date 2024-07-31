@@ -11,15 +11,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url('/') }}/css/style.css">
-    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('amshold.ico') }}" type="image/x-icon">
     <title>@yield('title-block')</title>
-    <link rel="canonical" href="https://www.amshold.ru/home">
+    <link rel="canonical" href="https://www.amshold.ru">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM1HiJfD7FQbDYI1xFjQsW5C1OfVo2ruGn4zHb5" crossorigin="anonymous">
 
 </head>
 
-<body class="bg-primary text-light"> <!-- Темно-синий фон и светлый текст -->
+<body class="bg-dark-blue text-light"> <!-- Темно-синий фон и светлый текст -->
     <div class="d-flex flex-column min-vh-100">
         <!-- Header -->
         <header class="bg-info p-3 shadow-sm fixed-top w-100">
@@ -83,7 +83,7 @@
             <p class="mb-0">Мы используем файлы cookie для улучшения работы нашего сайта. Продолжая использовать сайт,
                 вы соглашаетесь с нашей <a href="{{ route('privacy') }}"
                     class="text-white text-decoration-underline">политикой использования файлов cookie</a>.</p>
-            <button id="acceptCookies" class="btn btn-primary">Приянть</button>
+            <button id="acceptCookies" class="btn btn-primary">Принять</button>
         </div>
     </div>
 
