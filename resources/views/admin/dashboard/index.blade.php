@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container mt-5">
-        <h1>Все объявления</h1>
+        <h4>Все объявления</h4>
 
         <!-- Фильтрация по дате -->
         <form method="GET" action="{{ route('admin.dashboard.index') }}" class="mb-4">

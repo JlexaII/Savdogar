@@ -52,7 +52,7 @@ class AdvertisementController extends Controller
             'category_id' => 'required|exists:categories,id',
         ]);
 
-        $validated['is_active'] = false; // Устанавливаем значение по умолчанию
+        $validated['is_active'] = 0; // Устанавливаем значение по умолчанию для нового объявления
 
         // Обработка изображений
         if ($request->hasFile('images')) {
@@ -79,6 +79,11 @@ class AdvertisementController extends Controller
     // Форма для редактирования объявления
     public function edit(Advertisement $advertisement)
     {
+        // Проверка на права доступа
+        if (Auth::user()->id != $advertisement->user_id) {
+            return redirect()->route('advertisements.index')->with('error', 'У вас нет прав для редактирования этого объявления.');
+        }
+
         $categories = Category::with('subcategories')->get();
         return view('advertisements.edit', compact('advertisement', 'categories'));
     }
@@ -86,6 +91,11 @@ class AdvertisementController extends Controller
     // Обновление объявления
     public function update(Request $request, Advertisement $advertisement)
     {
+        // Проверка на права доступа
+        if (Auth::user()->id != $advertisement->user_id) {
+            return redirect()->route('advertisements.index')->with('error', 'У вас нет прав для обновления этого объявления.');
+        }
+
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
@@ -104,7 +114,7 @@ class AdvertisementController extends Controller
             }
             $validated['images'] = json_encode($imagePaths);
         }
-        $advertisement->is_active = 0; // Предположим, что 2 - это статус "Обработка"
+        $advertisement->is_active = 0; // Устанавливаем статус "На доработку" при обновлении
         $advertisement->update($validated);
 
         return redirect()->route('advertisements.index')->with('success', 'Объявление обновлено успешно');
@@ -113,6 +123,11 @@ class AdvertisementController extends Controller
     // Удаление объявления
     public function destroy(Advertisement $advertisement)
     {
+        // Проверка на права доступа
+        if (Auth::user()->id != $advertisement->user_id) {
+            return redirect()->route('advertisements.index')->with('error', 'У вас нет прав для удаления этого объявления.');
+        }
+
         $advertisement->delete();
         return redirect()->route('advertisements.index')->with('success', 'Объявление удалено успешно');
     }
