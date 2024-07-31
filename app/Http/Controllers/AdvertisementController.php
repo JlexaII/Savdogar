@@ -104,7 +104,7 @@ class AdvertisementController extends Controller
             }
             $validated['images'] = json_encode($imagePaths);
         }
-
+        $advertisement->is_active = 0; // Предположим, что 2 - это статус "Обработка"
         $advertisement->update($validated);
 
         return redirect()->route('advertisements.index')->with('success', 'Объявление обновлено успешно');

@@ -18,9 +18,10 @@ Auth::routes();
 Route::get('password/reset', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 Route::post('password/email', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 
-// Ресурсные маршруты для объявлений
+// Ресурсные маршруты для объявлений (исключая create и store, так как они отдельно определены)
 Route::resource('advertisements', AdvertisementController::class)->except(['create', 'store']);
 
+// Админ панель - только для аутентифицированных админов
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard.index');
     Route::post('/admin/dashboard/{id}/approve', [AdminDashboardController::class, 'approve'])->name('admin.dashboard.approve');
@@ -32,22 +33,23 @@ Route::middleware(['auth', 'admin'])->group(function () {
 Route::get('news/create', [NewsController::class, 'create'])->name('news.create');
 Route::post('news', [NewsController::class, 'store'])->name('news.store');
 
-
 // Маршруты для создания и сохранения объявления
 Route::get('categories/{category}/create', [AdvertisementController::class, 'create'])->name('advertisements.create');
 Route::post('advertisements', [AdvertisementController::class, 'store'])->name('advertisements.store');
+
+// Главная страница
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Маршруты для категорий
 Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
 
-// Маршрут для пользовательских объявлений
+// Маршрут для пользовательских объявлений - только для аутентифицированных пользователей
 Route::middleware('auth')->group(function () {
     Route::get('advertisements/index', [AdvertisementController::class, 'userAdvertisements'])->name('user.advertisements');
 });
 
 // Маршруты авторизации через социальные сети
-Route::get('auth/{provider}', [SocialController::class, 'redirectToProvider'])->name('social.login');
+Route::get('auth/{provider}', [SocialController::class, 'redirectToProvider']);
 Route::get('auth/{provider}/callback', [SocialController::class, 'handleProviderCallback']);
 
 // Маршруты для входа и регистрации

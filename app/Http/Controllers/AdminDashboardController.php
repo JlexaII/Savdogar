@@ -7,10 +7,22 @@ use Illuminate\Http\Request;
 
 class AdminDashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $advertisements = Advertisement::where('is_active', 0)->get();
-        return view('admin.dashboard.index', compact('advertisements'));
+        // Фильтрация по дате
+        $query = Advertisement::query(); // Убираем фильтр по is_active для отображения всех объявлений
+
+        if ($request->has('start_date') && $request->has('end_date')) {
+            $query->whereBetween('created_at', [$request->start_date, $request->end_date]);
+        }
+
+        // Пагинация
+        $advertisements = $query->paginate(10);
+
+        // Общее количество объявлений
+        $totalAdvertisements = Advertisement::count();
+
+        return view('admin.dashboard.index', compact('advertisements', 'totalAdvertisements'));
     }
 
     public function approve($id)
