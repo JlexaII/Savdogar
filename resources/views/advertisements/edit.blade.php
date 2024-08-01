@@ -1,18 +1,16 @@
-<!-- resources/views/advertisements/edit.blade.php -->
 @extends('layouts.app')
 
 @section('content')
     <div class="container mt-5">
         <h1 class="mb-4">Редактировать объявление</h1>
-        <form action="{{ route('advertisements.update', $advertisement->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('advertisements.update', $advertisement->id) }}" method="POST" enctype="multipart/form-data" id="edit-form">
             @csrf
             @method('PUT')
 
             <!-- Заголовок -->
             <div class="mb-3">
                 <label for="title" class="form-label">Заголовок</label>
-                <input type="text" name="title" id="title" class="form-control"
-                    value="{{ old('title', $advertisement->title) }}" required>
+                <input type="text" name="title" id="title" class="form-control" value="{{ old('title', $advertisement->title) }}" required>
                 @error('title')
                     <div class="text-danger mt-2">{{ $message }}</div>
                 @enderror
@@ -33,8 +31,7 @@
                 <input type="file" name="photo" id="photo" class="form-control">
                 @if ($advertisement->images)
                     @foreach (json_decode($advertisement->images) as $image)
-                        <img src="{{ asset('storage/' . $image) }}" alt="Image" class="img-thumbnail"
-                            style="max-height: 300px; max-width: 300px;">
+                        <img src="{{ asset('storage/' . $image) }}" alt="Image" class="img-thumbnail" style="max-height: 300px; max-width: 300px;">
                     @endforeach
                 @endif
                 @error('photo')
@@ -45,9 +42,17 @@
             <!-- Адрес -->
             <div class="mb-3">
                 <label for="address" class="form-label">Адрес</label>
-                <input type="text" name="address" id="address" class="form-control"
-                    value="{{ old('address', $advertisement->address) }}">
+                <input type="text" name="address" id="address" class="form-control" value="{{ old('address', $advertisement->address) }}">
                 @error('address')
+                    <div class="text-danger mt-2">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <!-- Цена -->
+            <div class="mb-3">
+                <label for="price" class="form-label">Цена</label>
+                <input type="number" name="price" id="price" class="form-control" value="{{ old('price', $advertisement->price) }}" step="0.01">
+                @error('price')
                     <div class="text-danger mt-2">{{ $message }}</div>
                 @enderror
             </div>
@@ -55,28 +60,25 @@
             <!-- Телефон -->
             <div class="mb-3">
                 <label for="phone" class="form-label">Телефон</label>
-                <input type="text" name="phone" id="phone" class="form-control"
-                    value="{{ old('phone', $advertisement->phone) }}" required>
+                <input type="text" name="phone" id="phone" class="form-control" value="{{ old('phone', $advertisement->phone) }}" required>
                 @error('phone')
                     <div class="text-danger mt-2">{{ $message }}</div>
                 @enderror
             </div>
 
             <!-- Квадратные метры -->
-            <div class="mb-3">
+            <div class="mb-3 d-none" id="square_meters_group">
                 <label for="square_meters" class="form-label">Квадратные метры</label>
-                <input type="number" name="square_meters" id="square_meters" class="form-control"
-                    value="{{ old('square_meters', $advertisement->square_meters) }}">
+                <input type="number" name="square_meters" id="square_meters" class="form-control" value="{{ old('square_meters', $advertisement->square_meters) }}">
                 @error('square_meters')
                     <div class="text-danger mt-2">{{ $message }}</div>
                 @enderror
             </div>
 
             <!-- Описание автомобиля -->
-            <div class="mb-3">
+            <div class="mb-3 d-none" id="car_description_group">
                 <label for="car_description" class="form-label">Описание автомобиля</label>
-                <input type="text" name="car_description" id="car_description" class="form-control"
-                    value="{{ old('car_description', $advertisement->car_description) }}">
+                <input type="text" name="car_description" id="car_description" class="form-control" value="{{ old('car_description', $advertisement->car_description) }}">
                 @error('car_description')
                     <div class="text-danger mt-2">{{ $message }}</div>
                 @enderror
@@ -89,8 +91,7 @@
                     @foreach ($categories as $category)
                         <optgroup label="{{ $category->name }}">
                             @foreach ($category->subcategories as $subcategory)
-                                <option value="{{ $subcategory->id }}"
-                                    {{ $subcategory->id == old('subcategory_id', $advertisement->subcategory_id) ? 'selected' : '' }}>
+                                <option value="{{ $subcategory->id }}" {{ $subcategory->id == old('subcategory_id', $advertisement->subcategory_id) ? 'selected' : '' }}>
                                     {{ $subcategory->name }}
                                 </option>
                             @endforeach
@@ -108,4 +109,31 @@
             </div>
         </form>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryMapping = {
+                'Недвижимость': ['square_meters_group'],
+                'Транспорт': ['car_description_group']
+            };
+
+            const subcategorySelect = document.getElementById('subcategory_id');
+
+            function toggleFields() {
+                const selectedSubcategory = subcategorySelect.options[subcategorySelect.selectedIndex].parentNode.label;
+                const fieldsToShow = categoryMapping[selectedSubcategory] || [];
+
+                // Скрыть все дополнительные поля
+                document.querySelectorAll('.d-none').forEach(el => el.classList.add('d-none'));
+
+                // Показать нужные поля
+                fieldsToShow.forEach(field => document.getElementById(field).classList.remove('d-none'));
+            }
+
+            subcategorySelect.addEventListener('change', toggleFields);
+
+            // Инициализация полей при загрузке страницы
+            toggleFields();
+        });
+    </script>
 @endsection

@@ -8,7 +8,7 @@ class Advertisement extends Model
 {
     protected $fillable = [
         'title', 'description', 'images', 'address', 'phone', 'is_active',
-        'square_meters', 'car_description', 'subcategory_id', 'user_id'
+        'square_meters', 'car_description', 'subcategory_id', 'user_id', 'price'
     ];
 
     protected $casts = [

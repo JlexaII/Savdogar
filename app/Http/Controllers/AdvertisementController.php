@@ -50,6 +50,7 @@ class AdvertisementController extends Controller
             'car_description' => 'nullable|string|max:255',
             'subcategory_id' => 'required|exists:subcategories,id',
             'category_id' => 'required|exists:categories,id',
+            'price' => 'required|numeric|min:0',
         ]);
 
         $validated['is_active'] = 0; // Устанавливаем значение по умолчанию для нового объявления
@@ -105,6 +106,7 @@ class AdvertisementController extends Controller
             'square_meters' => 'nullable|numeric',
             'car_description' => 'nullable|string|max:255',
             'subcategory_id' => 'required|exists:subcategories,id',
+            'price' => 'required|numeric|min:0',
         ]);
 
         if ($request->hasFile('images')) {

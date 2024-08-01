@@ -27,6 +27,10 @@
                 <input type="text" id="title" name="title" class="form-control" required>
             </div>
             <div class="form-group">
+                <label for="price">Сумма к оплате</label>
+                <input type="number" name="price" class="form-control" id="price" value="{{ old('price', $advertisement->price ?? '') }}" step="0.01">
+            </div>
+            <div class="form-group">
                 <label for="description">Описание</label>
                 <textarea id="description" name="description" class="form-control" rows="4" required></textarea>
             </div>
@@ -38,6 +42,10 @@
             <div class="form-group">
                 <label for="title">Название</label>
                 <input type="text" id="title" name="title" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="price">Цена</label>
+                <input type="number" name="price" class="form-control" id="price" value="{{ old('price', $advertisement->price ?? '') }}" step="0.01">
             </div>
             <div class="form-group">
                 <label for="address">Адрес</label>
@@ -65,6 +73,10 @@
                 <textarea id="description" name="description" class="form-control" rows="4" required></textarea>
             </div>
             <div class="form-group">
+                <label for="price">Цена</label>
+                <input type="number" name="price" class="form-control" id="price" value="{{ old('price', $advertisement->price ?? '') }}" step="0.01">
+            </div>
+            <div class="form-group">
                 <label for="phone">Телефон</label>
                 <input type="tel" id="phone" name="phone" class="form-control" required>
             </div>
@@ -79,7 +91,7 @@
             </div>
             <div class="form-group">
                 <label for="price">Цена</label>
-                <input type="number" id="price" name="price" class="form-control" step="0.01">
+                <input type="number" name="price" class="form-control" id="price" value="{{ old('price', $advertisement->price ?? '') }}" step="0.01">
             </div>
             <div class="form-group">
                 <label for="phone">Телефон</label>
@@ -95,6 +107,10 @@
                 <textarea id="description" name="description" class="form-control" rows="4" required></textarea>
             </div>
             <div class="form-group">
+                <label for="price">Цена</label>
+                <input type="number" name="price" class="form-control" id="price" value="{{ old('price', $advertisement->price ?? '') }}" step="0.01">
+            </div>
+            <div class="form-group">
                 <label for="phone">Телефон</label>
                 <input type="tel" id="phone" name="phone" class="form-control" required>
             </div>
@@ -108,6 +124,10 @@
                 <textarea id="description" name="description" class="form-control" rows="4" required></textarea>
             </div>
             <div class="form-group">
+                <label for="price">Цена</label>
+                <input type="number" name="price" class="form-control" id="price" value="{{ old('price', $advertisement->price ?? '') }}" step="0.01">
+            </div>
+            <div class="form-group">
                 <label for="phone">Телефон</label>
                 <input type="tel" id="phone" name="phone" class="form-control" required>
             </div>
@@ -119,6 +139,10 @@
             <div class="form-group">
                 <label for="description">Описание</label>
                 <textarea id="description" name="description" class="form-control" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="price">Цена</label>
+                <input type="number" name="price" class="form-control" id="price" value="{{ old('price', $advertisement->price ?? '') }}" step="0.01">
             </div>
             <div class="form-group">
                 <label for="phone">Телефон</label>
@@ -145,6 +169,10 @@
             <div class="form-group">
                 <label for="description">Описание</label>
                 <textarea id="description" name="description" class="form-control" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="price">Цена</label>
+                <input type="number" name="price" class="form-control" id="price" value="{{ old('price', $advertisement->price ?? '') }}" step="0.01">
             </div>
             <div class="form-group">
                 <label for="phone">Телефон</label>
