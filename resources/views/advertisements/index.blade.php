@@ -1,26 +1,33 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Список объявлений</h1>
+    <h1 class="mb-4">Список объявлений</h1>
 
-    <!-- Передаем параметр category в маршрут -->
     <a href="{{ route('advertisements.create', ['category' => $categoryId]) }}" class="btn btn-primary mb-3">Создать новое объявление</a>
 
-    <ul class="list-group">
-        @forelse ($advertisements as $advertisement)
-            <li class="list-group-item d-flex justify-content-between align-items-start">
-                <div>
-                    <h2>{{ $advertisement->title }}</h2>
-                    <p>{{ $advertisement->description }}</p>
-
-                    @if ($advertisement->images)
-                        @foreach (json_decode($advertisement->images) as $image)
-                            <img src="{{ asset('storage/' . $image) }}" alt="Image" class="img-thumbnail" style="max-height: 150px; max-width: 150px;">
-                        @endforeach
-                    @endif
-
-                    <!-- Показать статус объявления -->
-                    <p>
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Заголовок</th>
+                <th>Описание</th>
+                <th>Изображения</th>
+                <th>Статус</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($advertisements as $advertisement)
+                <tr>
+                    <td>{{ $advertisement->title }}</td>
+                    <td>{{ $advertisement->description }}</td>
+                    <td>
+                        @if ($advertisement->images)
+                            @foreach (json_decode($advertisement->images) as $image)
+                                <img src="{{ asset('storage/' . $image) }}" alt="Image" class="img-thumbnail" style="max-height: 50px; max-width: 50px;">
+                            @endforeach
+                        @endif
+                    </td>
+                    <td>
                         @if ($advertisement->is_active == 0)
                             <span class="badge bg-warning">На доработку</span>
                         @elseif ($advertisement->is_active == 1)
@@ -28,32 +35,28 @@
                         @elseif ($advertisement->is_active == 2)
                             <span class="badge bg-secondary">Нуждается в доработке</span>
                         @endif
-                    </p>
-                </div>
-
-                <!-- Действия доступны только для владельца объявления -->
-                @if (auth()->check() && (auth()->user()->id == $advertisement->user_id))
-                    <div class="btn-group" role="group" aria-label="Actions">
-                        {{-- @if ($advertisement->is_active == 0 || $advertisement->is_active == 2) --}}
-                            <a href="{{ route('advertisements.show', $advertisement->id) }}" class="btn btn-info btn-sm" title="Просмотреть">
-                                <i class="bi bi-eye"></i>
-                            </a>
-                            <a href="{{ route('advertisements.edit', $advertisement->id) }}" class="btn btn-warning btn-sm" title="Редактировать">
-                                <i class="bi bi-pencil"></i>
-                            </a>
-                            <form action="{{ route('advertisements.destroy', $advertisement->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm" title="Удалить">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </form>
-                        {{-- @endif --}}
-                    </div>
-                @endif
-            </li>
-        @empty
-            <li class="list-group-item">У вас нет объявлений.</li>
-        @endforelse
-    </ul>
+                    </td>
+                    <td>
+                        <a href="{{ route('advertisements.show', $advertisement->id) }}" class="btn btn-info btn-sm">
+                            <i class="bi bi-eye"></i> <!-- Просмотреть -->
+                        </a>
+                        <a href="{{ route('advertisements.edit', $advertisement->id) }}" class="btn btn-warning btn-sm">
+                            <i class="bi bi-pencil"></i> <!-- Редактировать -->
+                        </a>
+                        <form action="{{ route('advertisements.destroy', $advertisement->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="bi bi-trash"></i> <!-- Удалить -->
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="5">У вас нет объявлений.</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
 @endsection
