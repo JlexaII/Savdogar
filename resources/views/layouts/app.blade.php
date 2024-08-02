@@ -17,11 +17,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM1HiJfD7FQbDYI1xFjQsW5C1OfVo2ruGn4zHb5" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-
-
 </head>
 
-<body class="bg-dark-blue text-light"> <!-- Темно-синий фон и светлый текст -->
+<body class="bg-dark-blue text-light">
     <div class="d-flex flex-column min-vh-100">
         <!-- Header -->
         <header class="bg-info p-3 shadow-sm fixed-top w-100">
@@ -56,7 +54,6 @@
                 <!-- Main Content -->
                 <main
                     class="col-md-9 ms-sm-auto col-lg-10 px-md-4 offset-md-3 offset-lg-2 bg-light text-dark p-4 rounded shadow">
-                    <!-- Светло-синий фон для контента с классами Bootstrap -->
                     @if (Request::is('/'))
                         <section class="bg-primary text-white py-5 mb-4 rounded">
                             @include('inc.hero')
@@ -94,7 +91,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
-    <!-- Подключение Font Awesome -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 
