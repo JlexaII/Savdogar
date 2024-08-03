@@ -21,6 +21,8 @@
                         
                         <div class="card-body">                          
                             <p class="card-text">{{ Str::limit($advertisement->description, 100) }}</p>
+                            <p class="card-text">Цена: {{ Str::limit($advertisement->price, 100) }}</p>
+                            <p class="card-text">Телефон: {{ Str::limit($advertisement->phone, 100) }}</p>
                         </div>
                         <div class="card-footer">
                             <small class="text-muted">{{ $advertisement->created_at->format('d.m.Y') }}</small>
