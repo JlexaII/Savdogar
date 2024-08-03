@@ -1,12 +1,10 @@
 <div class="d-flex flex-column flex-shrink-0 p-1 bg-light" style="width: 100%;">
-    <span class="fs-4 mb-1 text-dark fw-bold">Выберите категорию</span>
-    <hr>
-    <ul class="nav nav-pills flex-column mb-auto">
+    <ul class="nav nav-pills flex-column mb-auto border border-success">
         @foreach ($categories as $category)
             <li class="nav-item mb-2">
                 <a class="nav-link link-dark d-flex align-items-center justify-content-between" data-bs-toggle="collapse" href="#category-{{ $category->id }}">
                     <div>
-                        <i class="bi bi-{{ $category->icon }} me-2"></i>{{ $category->name }}
+                        <img src="{{ asset('images/icons/' . $category->icon) }}" alt="{{ $category->name }} Icon" class="me-2" style="width: 24px; height: 24px;">{{ $category->name }}
                     </div>
                     <i class="bi bi-chevron-down"></i>
                 </a>
