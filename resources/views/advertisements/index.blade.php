@@ -3,7 +3,7 @@
 @section('content')
     <h1 class="mb-4">Список объявлений</h1>
 
-    <a href="{{ route('advertisements.create', ['category' => $categoryId]) }}" class="btn btn-primary mb-3">Создать новое объявление</a>
+    <a href="{{ route('categories.index') }}" class="btn btn-primary mb-3">Создать новое объявление</a>
 
     <table class="table table-bordered table-striped table-hover">
         <thead class="thead-dark">

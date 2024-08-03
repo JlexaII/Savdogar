@@ -42,6 +42,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Маршруты для категорий
 Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
+// Роуты для категорий и подкатегорий
+Route::get('categories/{category}', [AdvertisementController::class, 'showCategory'])->name('categories.show');
+Route::get('categories/{category}/subcategories/{subcategory}', [AdvertisementController::class, 'showSubcategory'])->name('categories.subcategory.show');
 
 // Маршрут для пользовательских объявлений - только для аутентифицированных пользователей
 Route::middleware('auth')->group(function () {

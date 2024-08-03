@@ -71,6 +71,15 @@ class AdvertisementController extends Controller
         return redirect()->route('advertisements.index')->with('success', 'Объявление создано успешно');
     }
 
+    public function showSubcategory($categoryId, $subcategoryId)
+    {
+        $advertisements = Advertisement::where('subcategory_id', $subcategoryId)->get();
+
+        $html = view('advertisements.partial_list', ['advertisements' => $advertisements])->render();
+
+        return response()->json(['html' => $html]);
+    }
+
     // Отображение одного объявления
     public function show(Advertisement $advertisement)
     {

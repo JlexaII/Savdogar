@@ -1,5 +1,3 @@
-<!-- resources/views/home.blade.php -->
-
 @extends('layouts.app')
 
 @section('title-block')
@@ -9,7 +7,8 @@
 @section('content')
     <div class="container mt-5">
         <h2>Последние объявления</h2>
-        <div class="row">
+        <!-- Контейнер для динамического обновления списка объявлений -->
+        <div id="advertisements-container" class="row">
             @foreach ($advertisements as $advertisement)
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">

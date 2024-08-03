@@ -12,7 +12,7 @@
                     <ul class="list-unstyled fw-normal pb-1 small ms-3 mt-2">
                         @foreach ($category->subcategories as $subcategory)
                             <li class="mb-1">
-                                <a href="#" class="link-dark rounded d-block py-1 px-2">
+                                <a href="{{ route('categories.subcategory.show', [$category->id, $subcategory->id]) }}" class="link-dark rounded d-block py-1 px-2">
                                     <i class="bi bi-arrow-right-circle me-2"></i>{{ $subcategory->name }}
                                 </a>
                             </li>
