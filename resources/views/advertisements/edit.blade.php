@@ -27,17 +27,14 @@
             </div>
 
             <!-- Фото -->
-            <div class="mb-3">
-                <label for="photo" class="form-label">Фото</label>
-                <input type="file" name="photo" id="photo" class="form-control">
+            <div class="form-group">
+                <label for="images">Изображения</label>
+                <input type="file" id="images" name="images[]" class="form-control" multiple>
                 @if ($advertisement->images)
                     @foreach (json_decode($advertisement->images) as $image)
-                        <img src="{{ asset('storage/' . $image) }}" alt="Image" class="img-thumbnail" style="max-height: 300px; max-width: 300px;">
+                        <img src="{{ asset('storage/' . $image) }}" alt="Изображение" style="max-width: 200px; margin-top: 10px;">
                     @endforeach
                 @endif
-                @error('photo')
-                    <div class="text-danger mt-2">{{ $message }}</div>
-                @enderror
             </div>
 
             <!-- Подкатегория -->
