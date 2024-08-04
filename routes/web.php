@@ -29,13 +29,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('/admin/dashboard/{id}', [AdminDashboardController::class, 'destroy'])->name('admin.dashboard.destroy'); // Удалить
 });
 
-// Роуты для новостей
-Route::get('news/create', [NewsController::class, 'create'])->name('news.create');
-Route::post('news', [NewsController::class, 'store'])->name('news.store');
 // Ресурсные маршруты для новостей
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::resource('news', NewsController::class)->except(['show']);
-});
+Route::resource('news', NewsController::class);
 
 // Маршруты для создания и сохранения объявления
 Route::get('categories/{category}/create', [AdvertisementController::class, 'create'])->name('advertisements.create');
