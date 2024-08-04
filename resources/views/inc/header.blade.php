@@ -1,5 +1,4 @@
 <!-- resources/views/inc/header.blade.php -->
-
 <nav class="navbar navbar-expand-lg navbar-light bg-primary-subtle shadow-lg border border-info-subtle border-bottom rounded sticky-top">
     <div class="container-fluid">
         <a href="/" class="d-flex align-items-center link-body-emphasis text-decoration-none">
@@ -21,9 +20,9 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         @auth
                         <li><a class="dropdown-item" href="{{ route('advertisements.index') }}">Мои объявления</a></li>
-                        <li><a class="dropdown-item" href="{{ route('categories.index') }}">Разместить объявление</a></li>
+                        {{-- <li><a class="dropdown-item" href="{{ route('categories.index') }}">Разместить объявление</a></li> --}}
                         @if(auth()->user()->is_admin)
-                        <li><a class="dropdown-item" href="{{ route('news.create') }}">Добавить новость</a></li>
+                        <li><a class="dropdown-item" href="{{ route('news.index') }}">Новости</a></li>
                         <li><a class="dropdown-item" href="{{ route('admin.dashboard.index') }}">Админ панель</a></li>
                         @endif
                         <li><hr class="dropdown-divider"></li>

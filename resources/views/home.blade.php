@@ -17,8 +17,7 @@
                                 <img src="{{ asset('storage/' . $image) }}" alt="{{ $advertisement->title }}" class="img-thumbnail"
                                     style="max-height: 300px; max-width: 300px;">
                             @endforeach
-                        @endif
-                        
+                        @endif                       
                         <div class="card-body">                          
                             <p class="card-text">{{ Str::limit($advertisement->description, 100) }}</p>
                             <p class="card-text">Цена: {{ Str::limit($advertisement->price, 100) }}</p>

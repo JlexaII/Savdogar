@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\News; // Убедитесь, что у вас есть модель News
+use App\Models\News;
 
 class NewsController extends Controller
 {
@@ -24,6 +24,38 @@ class NewsController extends Controller
             'content' => $request->content,
         ]);
 
-        return redirect()->route('home')->with('success', 'Новость добавлена успешно!');
+        return redirect()->route('news.index')->with('success', 'Новость добавлена успешно!');
+    }
+
+    public function index()
+    {
+        $news = News::all();
+        return view('news.index', compact('news'));
+    }
+
+    public function edit(News $news)
+    {
+        return view('news.edit', compact('news'));
+    }
+
+    public function update(Request $request, News $news)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+
+        $news->update([
+            'title' => $request->title,
+            'content' => $request->content,
+        ]);
+
+        return redirect()->route('news.index')->with('success', 'Новость обновлена успешно!');
+    }
+
+    public function destroy(News $news)
+    {
+        $news->delete();
+        return redirect()->route('news.index')->with('success', 'Новость удалена успешно!');
     }
 }
