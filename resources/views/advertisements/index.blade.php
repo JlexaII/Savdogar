@@ -37,9 +37,9 @@
                         @endif
                     </td>
                     <td>
-                        <a href="{{ route('advertisements.show', $advertisement->id) }}" class="btn btn-info btn-sm">
+                        {{-- <a href="{{ route('advertisements.show', $advertisement->id) }}" class="btn btn-info btn-sm">
                             <i class="bi bi-eye"></i> <!-- Просмотреть -->
-                        </a>
+                        </a> --}}
                         <a href="{{ route('advertisements.edit', $advertisement->id) }}" class="btn btn-warning btn-sm">
                             <i class="bi bi-pencil"></i> <!-- Редактировать -->
                         </a>

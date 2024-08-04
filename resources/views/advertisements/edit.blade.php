@@ -1,3 +1,4 @@
+{{-- resources/views/advertisements/edit.blade.php --}}
 @extends('layouts.app')
 
 @section('content')
@@ -35,6 +36,25 @@
                     @endforeach
                 @endif
                 @error('photo')
+                    <div class="text-danger mt-2">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <!-- Подкатегория -->
+            <div class="mb-3">
+                <label for="subcategory_id" class="form-label">Подкатегория</label>
+                <select name="subcategory_id" id="subcategory_id" class="form-select" required>
+                    @foreach ($categories as $category)
+                        <optgroup label="{{ $category->name }}">
+                            @foreach ($category->subcategories as $subcategory)
+                                <option value="{{ $subcategory->id }}" {{ $subcategory->id == old('subcategory_id', $advertisement->subcategory_id) ? 'selected' : '' }}>
+                                    {{ $subcategory->name }}
+                                </option>
+                            @endforeach
+                        </optgroup>
+                    @endforeach
+                </select>
+                @error('subcategory_id')
                     <div class="text-danger mt-2">{{ $message }}</div>
                 @enderror
             </div>
@@ -84,56 +104,7 @@
                 @enderror
             </div>
 
-            <!-- Подкатегория -->
-            <div class="mb-3">
-                <label for="subcategory_id" class="form-label">Подкатегория</label>
-                <select name="subcategory_id" id="subcategory_id" class="form-select" required>
-                    @foreach ($categories as $category)
-                        <optgroup label="{{ $category->name }}">
-                            @foreach ($category->subcategories as $subcategory)
-                                <option value="{{ $subcategory->id }}" {{ $subcategory->id == old('subcategory_id', $advertisement->subcategory_id) ? 'selected' : '' }}>
-                                    {{ $subcategory->name }}
-                                </option>
-                            @endforeach
-                        </optgroup>
-                    @endforeach
-                </select>
-                @error('subcategory_id')
-                    <div class="text-danger mt-2">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <!-- Кнопка обновления -->
-            <div class="mb-3">
-                <button type="submit" class="btn btn-primary">Обновить</button>
-            </div>
+            <button type="submit" class="btn btn-primary">Обновить объявление</button>
         </form>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const categoryMapping = {
-                'Недвижимость': ['square_meters_group'],
-                'Транспорт': ['car_description_group']
-            };
-
-            const subcategorySelect = document.getElementById('subcategory_id');
-
-            function toggleFields() {
-                const selectedSubcategory = subcategorySelect.options[subcategorySelect.selectedIndex].parentNode.label;
-                const fieldsToShow = categoryMapping[selectedSubcategory] || [];
-
-                // Скрыть все дополнительные поля
-                document.querySelectorAll('.d-none').forEach(el => el.classList.add('d-none'));
-
-                // Показать нужные поля
-                fieldsToShow.forEach(field => document.getElementById(field).classList.remove('d-none'));
-            }
-
-            subcategorySelect.addEventListener('change', toggleFields);
-
-            // Инициализация полей при загрузке страницы
-            toggleFields();
-        });
-    </script>
 @endsection

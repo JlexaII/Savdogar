@@ -1,10 +1,11 @@
+{{-- resources/views/advertisements/create.blade.php --}}
 @extends('layouts.app')
 
 @section('content')
     <h1>Создать объявление в категории "{{ $category->name }}"</h1>
     <form action="{{ route('advertisements.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        
+
         <!-- Скрытое поле для ID категории -->
         <input type="hidden" name="category_id" value="{{ $category->id }}">
         <input type="hidden" name="user_id" value="{{ Auth::id() }}">
@@ -21,164 +22,40 @@
         </div>
 
         <!-- Поля формы зависят от категории -->
-        @if ($category->name === 'Работа')
-            <div class="form-group">
-                <label for="title">Название вакансии</label>
-                <input type="text" id="title" name="title" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="price">Сумма к оплате</label>
-                <input type="number" name="price" class="form-control" id="price" value="{{ old('price', $advertisement->price ?? '') }}" step="0.01">
-            </div>
-            <div class="form-group">
-                <label for="description">Описание</label>
-                <textarea id="description" name="description" class="form-control" rows="4" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="phone">Телефон</label>
-                <input type="tel" id="phone" name="phone" class="form-control" required>
-            </div>
-        @elseif ($category->name === 'Недвижимость')
-            <div class="form-group">
-                <label for="title">Название</label>
-                <input type="text" id="title" name="title" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="price">Цена</label>
-                <input type="number" name="price" class="form-control" id="price" value="{{ old('price', $advertisement->price ?? '') }}" step="0.01">
-            </div>
-            <div class="form-group">
-                <label for="address">Адрес</label>
-                <input type="text" id="address" name="address" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="square">Площадь (кв. м.)</label>
-                <input type="number" id="square" name="square" class="form-control" step="0.01" required>
-            </div>
-            <div class="form-group">
-                <label for="description">Описание</label>
-                <textarea id="description" name="description" class="form-control" rows="4" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="phone">Телефон</label>
-                <input type="tel" id="phone" name="phone" class="form-control" required>
-            </div>
-        @elseif ($category->name === 'Транспорт')
-            <div class="form-group">
-                <label for="title">Модель автомобиля</label>
-                <input type="text" id="title" name="title" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="description">Описание</label>
-                <textarea id="description" name="description" class="form-control" rows="4" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="price">Цена</label>
-                <input type="number" name="price" class="form-control" id="price" value="{{ old('price', $advertisement->price ?? '') }}" step="0.01">
-            </div>
-            <div class="form-group">
-                <label for="phone">Телефон</label>
-                <input type="tel" id="phone" name="phone" class="form-control" required>
-            </div>
-        @elseif ($category->name === 'Дом и сад')
-            <div class="form-group">
-                <label for="title">Название</label>
-                <input type="text" id="title" name="title" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="description">Описание</label>
-                <textarea id="description" name="description" class="form-control" rows="4" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="price">Цена</label>
-                <input type="number" name="price" class="form-control" id="price" value="{{ old('price', $advertisement->price ?? '') }}" step="0.01">
-            </div>
-            <div class="form-group">
-                <label for="phone">Телефон</label>
-                <input type="tel" id="phone" name="phone" class="form-control" required>
-            </div>
-        @elseif ($category->name === 'Электроника')
-            <div class="form-group">
-                <label for="title">Название устройства</label>
-                <input type="text" id="title" name="title" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="description">Описание</label>
-                <textarea id="description" name="description" class="form-control" rows="4" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="price">Цена</label>
-                <input type="number" name="price" class="form-control" id="price" value="{{ old('price', $advertisement->price ?? '') }}" step="0.01">
-            </div>
-            <div class="form-group">
-                <label for="phone">Телефон</label>
-                <input type="tel" id="phone" name="phone" class="form-control" required>
-            </div>
-        @elseif ($category->name === 'Личные вещи')
-            <div class="form-group">
-                <label for="title">Название</label>
-                <input type="text" id="title" name="title" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="description">Описание</label>
-                <textarea id="description" name="description" class="form-control" rows="4" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="price">Цена</label>
-                <input type="number" name="price" class="form-control" id="price" value="{{ old('price', $advertisement->price ?? '') }}" step="0.01">
-            </div>
-            <div class="form-group">
-                <label for="phone">Телефон</label>
-                <input type="tel" id="phone" name="phone" class="form-control" required>
-            </div>
-        @elseif ($category->name === 'Хобби и отдых')
-            <div class="form-group">
-                <label for="title">Название</label>
-                <input type="text" id="title" name="title" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="description">Описание</label>
-                <textarea id="description" name="description" class="form-control" rows="4" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="price">Цена</label>
-                <input type="number" name="price" class="form-control" id="price" value="{{ old('price', $advertisement->price ?? '') }}" step="0.01">
-            </div>
-            <div class="form-group">
-                <label for="phone">Телефон</label>
-                <input type="tel" id="phone" name="phone" class="form-control" required>
-            </div>
-        @elseif ($category->name === 'Животные')
-            <div class="form-group">
-                <label for="title">Название</label>
-                <input type="text" id="title" name="title" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="description">Описание</label>
-                <textarea id="description" name="description" class="form-control" rows="4" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="phone">Телефон</label>
-                <input type="tel" id="phone" name="phone" class="form-control" required>
-            </div>
-        @elseif ($category->name === 'Для бизнеса')
-            <div class="form-group">
-                <label for="title">Название</label>
-                <input type="text" id="title" name="title" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="description">Описание</label>
-                <textarea id="description" name="description" class="form-control" rows="4" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="price">Цена</label>
-                <input type="number" name="price" class="form-control" id="price" value="{{ old('price', $advertisement->price ?? '') }}" step="0.01">
-            </div>
-            <div class="form-group">
-                <label for="phone">Телефон</label>
-                <input type="tel" id="phone" name="phone" class="form-control" required>
-            </div>
-        @endif
+        @switch($category->name)
+            @case('Работа')
+                @include('advertisements.partials.form_work')
+                @break
+            @case('Недвижимость')
+                @include('advertisements.partials.form_real_estate')
+                @break
+            @case('Транспорт')
+                @include('advertisements.partials.form_transport')
+                @break
+            @case('Дом и сад')
+                @include('advertisements.partials.form_home_garden')
+                @break
+            @case('Инструменты')
+                @include('advertisements.partials.form_tools')
+                @break
+            @case('Бизнес и услуги')
+                @include('advertisements.partials.form_business_services')
+                @break
+            @case('Личные вещи')
+                @include('advertisements.partials.form_personal_items')
+                @break
+            @case('Хобби и отдых')
+                @include('advertisements.partials.form_hobbies')
+                @break
+            @case('Животные')
+                @include('advertisements.partials.form_animals')
+                @break
+            @case('Для бизнеса')
+                @include('advertisements.partials.form_for_business')
+                @break
+            @default
+                <p>Выберите категорию.</p>
+        @endswitch
 
         <!-- Поле для загрузки изображений -->
         <div class="form-group">
@@ -197,7 +74,7 @@
 @endsection
 
 <style>
-.form-group {
-    margin-bottom: 1rem;
-}
+    .form-group {
+        margin-bottom: 1rem;
+    }
 </style>
