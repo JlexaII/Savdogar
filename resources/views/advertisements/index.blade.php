@@ -23,7 +23,8 @@
                     <td>
                         @if ($advertisement->images)
                             @foreach (json_decode($advertisement->images) as $image)
-                                <img src="{{ asset('storage/' . $image) }}" alt="Image" class="img-thumbnail" style="max-height: 50px; max-width: 50px;">
+                                <img src="{{ asset('storage/' . $image) }}" alt="Image" class="img-thumbnail"
+                                    style="max-height: 50px; max-width: 50px;">
                             @endforeach
                         @endif
                     </td>
@@ -37,13 +38,11 @@
                         @endif
                     </td>
                     <td>
-                        {{-- <a href="{{ route('advertisements.show', $advertisement->id) }}" class="btn btn-info btn-sm">
-                            <i class="bi bi-eye"></i> <!-- Просмотреть -->
-                        </a> --}}
                         <a href="{{ route('advertisements.edit', $advertisement->id) }}" class="btn btn-warning btn-sm">
                             <i class="bi bi-pencil"></i> <!-- Редактировать -->
                         </a>
-                        <form action="{{ route('advertisements.destroy', $advertisement->id) }}" method="POST" style="display:inline;">
+                        <form action="{{ route('advertisements.destroy', $advertisement->id) }}" method="POST"
+                            style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">
