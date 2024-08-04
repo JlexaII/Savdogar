@@ -63,11 +63,11 @@
             <input type="file" id="images" name="images[]" class="form-control" multiple>
         </div>
 
-        <!-- Поле для ввода дополнительной информации, если нужно -->
+       {{--  <!-- Поле для ввода дополнительной информации, если нужно -->
         <div class="form-group">
             <label for="additional_info">Дополнительная информация</label>
             <textarea id="additional_info" name="additional_info" class="form-control" rows="3"></textarea>
-        </div>
+        </div> --}}
 
         <button type="submit" class="btn btn-primary">Создать объявление</button>
     </form>

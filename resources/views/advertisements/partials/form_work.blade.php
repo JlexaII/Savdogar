@@ -1,15 +1,21 @@
 {{-- resources/views/advertisements/partials/form_work.blade.php --}}
+<!-- Обязательные поля -->
 <div class="form-group">
-    <label for="job_title">Название вакансии</label>
-    <input type="text" id="job_title" name="job_title" class="form-control" value="{{ old('job_title') }}" required>
+    <label for="title">Название</label>
+    <input type="text" id="title" name="title" class="form-control" value="{{ old('title') }}" required>
 </div>
 
 <div class="form-group">
-    <label for="company">Компания</label>
-    <input type="text" id="company" name="company" class="form-control" value="{{ old('company') }}">
+    <label for="description">Описание</label>
+    <textarea id="description" name="description" class="form-control" rows="3" required>{{ old('description') }}</textarea>
 </div>
 
 <div class="form-group">
-    <label for="salary">Зарплата</label>
-    <input type="number" id="salary" name="salary" class="form-control" value="{{ old('salary') }}" step="0.01">
+    <label for="phone">Телефон</label>
+    <input type="text" id="phone" name="phone" class="form-control" value="{{ old('phone') }}" required>
+</div>
+
+<div class="form-group">
+    <label for="price">Цена</label>
+    <input type="number" id="price" name="price" class="form-control" value="{{ old('price') }}" required>
 </div>
