@@ -6,20 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description"
-        content="Invest in AXMEDOV'S - a leading company in IT and construction technologies. Discover our innovative projects and opportunities for growing your capital.">
+        content="Размещайте бесплатные объявления на AMS. Легко продайте или найдите нужное среди тысяч предложений по недвижимости, транспорту, личным вещам и многому другому.">
     <meta name="robots" content="index, follow">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url('/') }}/css/style.css">
     <link rel="icon" href="{{ asset('amshold.ico') }}" type="image/x-icon">
-    <title>@yield('title-block')</title>
+    <title>@yield('title-block', 'Бесплатные объявления на AMS')</title>
     <link rel="canonical" href="https://www.amshold.ru">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM1HiJfD7FQbDYI1xFjQsW5C1OfVo2ruGn4zHb5" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
 </head>
+
 
 <body class="bg-dark-blue text-light">
     <div class="d-flex flex-column min-vh-100">
