@@ -22,11 +22,11 @@ Route::post('password/email', [App\Http\Controllers\Auth\ForgotPasswordControlle
 Route::resource('advertisements', AdvertisementController::class)->except(['create', 'store']);
 
 // Админ панель - только для аутентифицированных админов
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard.index');
-    Route::post('/admin/dashboard/{id}/approve', [AdminDashboardController::class, 'approve'])->name('admin.dashboard.approve');
-    Route::post('/admin/dashboard/{id}/rework', [AdminDashboardController::class, 'rework'])->name('admin.dashboard.rework'); // Доработать
-    Route::delete('/admin/dashboard/{id}', [AdminDashboardController::class, 'destroy'])->name('admin.dashboard.destroy'); // Удалить
+Route::middleware('auth')->group(function () {
+    Route::get('admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard.index');
+    Route::post('admin/dashboard/{id}/approve', [AdminDashboardController::class, 'approve'])->name('admin.dashboard.approve');
+    Route::post('admin/dashboard/{id}/rework', [AdminDashboardController::class, 'rework'])->name('admin.dashboard.rework');
+    Route::delete('admin/dashboard/{id}/destroy', [AdminDashboardController::class, 'destroy'])->name('admin.dashboard.destroy');
 });
 
 // Ресурсные маршруты для новостей

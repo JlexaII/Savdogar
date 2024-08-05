@@ -1,10 +1,7 @@
-{{-- resources/views/advertisements/partials/form_tools.blade.php --}}
+{{-- resources/views/advertisements/partials/form_elektr.blade.php --}}
 <div class="form-group">
-    <label for="tool_type">Тип инструмента</label>
-    <select id="tool_type" name="title" class="form-control" required>
-        <option value="Электроинструмент">Электроинструмент</option>
-        <option value="Ручной инструмент">Ручной инструмент</option>
-    </select>
+    <label for="title">Модель</label>
+    <input type="text" id="title" name="title" class="form-control" value="{{ old('title') }}" required>
 </div>
 
 <div class="form-group">

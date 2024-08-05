@@ -25,34 +25,48 @@
         @switch($category->name)
             @case('Работа')
                 @include('advertisements.partials.form_work')
-                @break
+            @break
+
             @case('Недвижимость')
                 @include('advertisements.partials.form_real_estate')
-                @break
+            @break
+
             @case('Транспорт')
                 @include('advertisements.partials.form_transport')
-                @break
+            @break
+
             @case('Дом и сад')
                 @include('advertisements.partials.form_home_garden')
-                @break
+            @break
+
             @case('Инструменты')
                 @include('advertisements.partials.form_tools')
-                @break
+            @break
+
             @case('Бизнес и услуги')
                 @include('advertisements.partials.form_business_services')
-                @break
+            @break
+
+            @case('Электроника')
+                @include('advertisements.partials.form_elektr')
+            @break
+
             @case('Личные вещи')
                 @include('advertisements.partials.form_personal_items')
-                @break
+            @break
+
             @case('Хобби и отдых')
                 @include('advertisements.partials.form_hobbies')
-                @break
+            @break
+
             @case('Животные')
                 @include('advertisements.partials.form_animals')
-                @break
+            @break
+
             @case('Для бизнеса')
                 @include('advertisements.partials.form_for_business')
-                @break
+            @break
+
             @default
                 <p>Выберите категорию.</p>
         @endswitch
@@ -63,7 +77,7 @@
             <input type="file" id="images" name="images[]" class="form-control" multiple>
         </div>
 
-       {{--  <!-- Поле для ввода дополнительной информации, если нужно -->
+        {{--  <!-- Поле для ввода дополнительной информации, если нужно -->
         <div class="form-group">
             <label for="additional_info">Дополнительная информация</label>
             <textarea id="additional_info" name="additional_info" class="form-control" rows="3"></textarea>

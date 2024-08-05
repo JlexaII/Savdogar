@@ -125,10 +125,10 @@ class AdvertisementController extends Controller
 
         // Логирование для отладки
         if ($request->hasFile('images')) {
-            \Log::info('Файлы загружаются');
-            \Log::info($request->file('images'));
+            Log::info('Файлы загружаются');
+            Log::info($request->file('images'));
         } else {
-            \Log::info('Файлы не загружаются');
+            Log::info('Файлы не загружаются');
         }
 
         // Обработка изображений

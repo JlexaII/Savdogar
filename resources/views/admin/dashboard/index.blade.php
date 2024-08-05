@@ -8,10 +8,12 @@
         <form method="GET" action="{{ route('admin.dashboard.index') }}" class="mb-4">
             <div class="row g-3">
                 <div class="col-12 col-md-4">
-                    <input type="date" name="start_date" class="form-control" placeholder="Дата начала" value="{{ request('start_date') }}">
+                    <input type="date" name="start_date" class="form-control" placeholder="Дата начала"
+                        value="{{ request('start_date') }}">
                 </div>
                 <div class="col-12 col-md-4">
-                    <input type="date" name="end_date" class="form-control" placeholder="Дата окончания" value="{{ request('end_date') }}">
+                    <input type="date" name="end_date" class="form-control" placeholder="Дата окончания"
+                        value="{{ request('end_date') }}">
                 </div>
                 <div class="col-12 col-md-4">
                     <button type="submit" class="btn btn-primary w-100">Фильтровать</button>
@@ -47,7 +49,8 @@
                             <td>
                                 @if ($advertisement->images)
                                     @foreach (json_decode($advertisement->images) as $image)
-                                        <img src="{{ asset('storage/' . $image) }}" alt="Image" class="img-thumbnail" style="max-height: 100px; max-width: 100px;">
+                                        <img src="{{ asset('storage/' . $image) }}" alt="Image" class="img-thumbnail"
+                                            style="max-height: 100px; max-width: 100px;">
                                     @endforeach
                                 @endif
                             </td>
@@ -63,27 +66,28 @@
                             </td>
                             <td>
                                 <!-- Кнопка одобрения -->
-                                @if ($advertisement->is_active != 1)
-                                    <form action="{{ route('admin.dashboard.approve', $advertisement->id) }}" method="POST" style="display:inline;">
-                                        @csrf
-                                        <button type="submit" class="btn btn-success btn-sm" title="Одобрить">
-                                            <i class="bi bi-check-circle"></i>
-                                        </button>
-                                    </form>
-                                @endif
+                                <form action="{{ route('admin.dashboard.approve', $advertisement->id) }}" method="POST"
+                                    style="display:inline;">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success btn-sm approve-btn" title="Одобрить"
+                                        style="{{ $advertisement->is_active == 0 ? 'display:inline;' : 'display:none;' }}">
+                                        <i class="bi bi-check-circle"></i>
+                                    </button>
+                                </form>
 
                                 <!-- Кнопка на доработку -->
-                                @if ($advertisement->is_active != 2)
-                                    <form action="{{ route('admin.dashboard.rework', $advertisement->id) }}" method="POST" style="display:inline;">
-                                        @csrf
-                                        <button type="submit" class="btn btn-warning btn-sm" title="На доработку">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </button>
-                                    </form>
-                                @endif
+                                <form action="{{ route('admin.dashboard.rework', $advertisement->id) }}" method="POST"
+                                    style="display:inline;">
+                                    @csrf
+                                    <button type="submit" class="btn btn-warning btn-sm rework-btn" title="На доработку"
+                                        style="{{ $advertisement->is_active == 1 ? 'display:inline;' : 'display:none;' }}">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </button>
+                                </form>
 
                                 <!-- Кнопка удаления -->
-                                <form action="{{ route('admin.dashboard.destroy', $advertisement->id) }}" method="POST" style="display:inline;">
+                                <form action="{{ route('admin.dashboard.destroy', $advertisement->id) }}" method="POST"
+                                    style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm" title="Удалить">
@@ -102,6 +106,6 @@
         </div>
 
         <!-- Пагинация -->
-        {{ $advertisements->links() }}
+        {{ $advertisements->links('pagination::bootstrap-5') }}
     </div>
 @endsection
