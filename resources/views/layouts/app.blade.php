@@ -8,6 +8,10 @@
     <meta name="description"
         content="Размещайте бесплатные объявления на AMS. Легко продайте или найдите нужное среди тысяч предложений по недвижимости, транспорту, личным вещам и многому другому.">
     <meta name="robots" content="index, follow">
+    <meta name="description"
+        content="Открылся новый сайт для бесплатных объявлений. Разместите свои предложения в различных категориях быстро и легко. Бесплатное размещение и удобный интерфейс.">
+    <meta name="description"
+        content="Расширение возможностей сайта для бесплатных объявлений. Новые категории для размещения объявлений. Бесплатное размещение и удобный поиск.">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url('/') }}/css/style.css">
@@ -144,8 +148,9 @@
                             headers: {
                                 'X-Requested-With': 'XMLHttpRequest', // Указываем, что запрос выполнен через AJAX
                                 'X-CSRF-TOKEN': document.querySelector(
-                                        'meta[name="csrf-token"]').getAttribute(
-                                    'content') // Добавляем CSRF токен для защиты от CSRF атак
+                                    'meta[name="csrf-token"]').getAttribute(
+                                    'content'
+                                ) // Добавляем CSRF токен для защиты от CSRF атак
                             }
                         })
                         .then(response => response.json()) // Преобразуем ответ в JSON
@@ -156,39 +161,39 @@
                                     var reworkBtn = row.querySelector('.rework-btn');
                                     if (approveBtn && reworkBtn) {
                                         approveBtn.style.display =
-                                        'none'; // Скрываем кнопку approve
+                                            'none'; // Скрываем кнопку approve
                                         reworkBtn.style.display =
-                                        'inline-block'; // Показываем кнопку rework
+                                            'inline-block'; // Показываем кнопку rework
                                         row.querySelector('td:nth-child(6)').textContent =
                                             'Одобрено'; // Меняем текст в 6-ой колонке на "Одобрено"
                                     } else {
                                         console.error(
                                             'Не найдены кнопки .approve-btn или .rework-btn'
-                                            );
+                                        );
                                     }
                                 } else if (url.includes(
-                                    '/rework')) { // Если URL содержит "/rework"
+                                        '/rework')) { // Если URL содержит "/rework"
                                     var approveBtn = row.querySelector('.approve-btn');
                                     var reworkBtn = row.querySelector('.rework-btn');
                                     if (approveBtn && reworkBtn) {
                                         reworkBtn.style.display =
-                                        'none'; // Скрываем кнопку rework
+                                            'none'; // Скрываем кнопку rework
                                         approveBtn.style.display =
-                                        'inline-block'; // Показываем кнопку approve
+                                            'inline-block'; // Показываем кнопку approve
                                         row.querySelector('td:nth-child(6)').textContent =
                                             'На доработке'; // Меняем текст в 6-ой колонке на "На доработке"
                                     } else {
                                         console.error(
                                             'Не найдены кнопки .approve-btn или .rework-btn'
-                                            );
+                                        );
                                     }
                                 } else if (url.includes(
-                                    '/destroy')) { // Если URL содержит "/destroy"
+                                        '/destroy')) { // Если URL содержит "/destroy"
                                     row.remove(); // Удаляем строку таблицы
                                 }
                             } else { // Если запрос не выполнен успешно
                                 alert('Ошибка: ' + data
-                                .message); // Показываем сообщение об ошибке
+                                    .message); // Показываем сообщение об ошибке
                             }
                         })
                         .catch(error => { // Обработка ошибок при выполнении запроса
@@ -197,4 +202,17 @@
                 });
             });
     });
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PW2K75RTZ5"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'G-PW2K75RTZ5');
 </script>
