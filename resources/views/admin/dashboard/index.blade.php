@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+ 
 @section('content')
     <div class="container mt-5">
         <h4>Все объявления</h4>
