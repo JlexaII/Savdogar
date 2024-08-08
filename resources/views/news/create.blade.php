@@ -12,7 +12,7 @@
         </div>
         <div class="mb-3">
             <label for="content" class="form-label">Содержание</label>
-            <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
+            <textarea class="form-control" id="content" name="content" rows="5" required style="white-space: pre-wrap;"></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Сохранить</button>
     </form>

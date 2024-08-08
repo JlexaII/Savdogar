@@ -21,7 +21,7 @@
                     @forelse ($advertisements as $advertisement)
                         <tr>
                             <td>{{ $advertisement->title }}</td>
-                            <td>{{ $advertisement->description }}</td>
+                            <td>{{ Str::limit($advertisement->description, 50) }}</td>
                             <td>
                                 @if ($advertisement->images)
                                     @foreach (json_decode($advertisement->images) as $image)

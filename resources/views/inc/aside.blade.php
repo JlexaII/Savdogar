@@ -2,7 +2,7 @@
 <div class="d-flex flex-column flex-shrink-0 bg-light" style="width: 100%; border-right: 1px solid #dee2e6;">
     <!-- Категории (скрываются на странице "Мои объявления") -->
     @unless(request()->routeIs('advertisements.index'))
-        <ul class="nav nav-pills flex-column mb-auto border-bottom border-secondary pb-2">
+        <ul class="nav nav-pills flex-column mb-auto border-bottom border-secondary pb-2 border border-info">
             @foreach ($categories as $category)
                 <li class="nav-item mb-2">
                     <a class="nav-link link-dark d-flex align-items-center justify-content-between" data-bs-toggle="collapse" href="#category-{{ $category->id }}" aria-expanded="false">

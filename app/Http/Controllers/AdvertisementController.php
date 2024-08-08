@@ -6,22 +6,34 @@ use App\Models\Advertisement;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log; // Добавьте это
-use Illuminate\Support\Facades\Storage; // Добавьте это
-
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class AdvertisementController extends Controller
 {
+    // Конструктор для применения middleware аутентификации
+    public function __construct()
+    {
+        $this->middleware('auth')->except('show');
+    }
+
     // Отображение списка объявлений
     public function index()
     {
         $user = Auth::user();
-        $advertisements = Advertisement::where('user_id', $user->id)->get();
-        $categoryId = 1; // Установите ID категории или получите его из запроса
-        return view('advertisements.index', [
-            'advertisements' => $advertisements,
-            'categoryId' => $categoryId
-        ]);
+
+        // Проверка, что пользователь аутентифицирован
+        if ($user) {
+            $advertisements = Advertisement::where('user_id', $user->id)->get();
+            $categoryId = 1; // Установите ID категории или получите его из запроса
+            return view('advertisements.index', [
+                'advertisements' => $advertisements,
+                'categoryId' => $categoryId
+            ]);
+        } else {
+            // Перенаправление на страницу входа, если пользователь не аутентифицирован
+            return redirect()->route('login')->with('error', 'Вы должны быть аутентифицированы для доступа к этой странице.');
+        }
     }
 
     // Форма для создания нового объявления
@@ -35,8 +47,13 @@ class AdvertisementController extends Controller
     public function userAdvertisements()
     {
         $user = Auth::user();
-        $advertisements = Advertisement::where('user_id', $user->id)->get();
-        return view('advertisements.index', compact('advertisements'));
+
+        if ($user) {
+            $advertisements = Advertisement::where('user_id', $user->id)->get();
+            return view('advertisements.index', compact('advertisements'));
+        } else {
+            return redirect()->route('login')->with('error', 'Вы должны быть аутентифицированы для доступа к этой странице.');
+        }
     }
 
     // Сохранение нового объявления
@@ -45,7 +62,7 @@ class AdvertisementController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Валидация для каждого изображения
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'address' => 'nullable|string|max:255',
             'phone' => 'required|string|max:20',
             'square_meters' => 'nullable|numeric',
@@ -56,6 +73,7 @@ class AdvertisementController extends Controller
         ]);
 
         $validated['is_active'] = 0; // Устанавливаем значение по умолчанию для нового объявления
+        $validated['user_id'] = auth()->id(); // Добавьте user_id
 
         // Обработка изображений
         if ($request->hasFile('images')) {
@@ -65,8 +83,6 @@ class AdvertisementController extends Controller
             }
             $validated['images'] = json_encode($imagePaths);
         }
-        // Добавьте user_id
-        $validated['user_id'] = auth()->id();
 
         Advertisement::create($validated);
 
@@ -84,12 +100,6 @@ class AdvertisementController extends Controller
 
         return response()->json(['html' => $html]);
     }
-
-    // Отображение одного объявления
-    /*   public function show(Advertisement $advertisement)
-    {
-        return view('advertisements.show', compact('advertisement'));
-    } */
 
     // Форма для редактирования объявления
     public function edit(Advertisement $advertisement)
@@ -153,6 +163,14 @@ class AdvertisementController extends Controller
 
         return redirect()->route('advertisements.index')->with('success', 'Объявление обновлено успешно');
     }
+
+    // app/Http/Controllers/AdvertisementController.php
+    public function show($id)
+    {
+        $advertisement = Advertisement::findOrFail($id);
+        return view('advertisements.show', compact('advertisement'));
+    }
+
 
     // Удаление объявления
     public function destroy(Advertisement $advertisement)

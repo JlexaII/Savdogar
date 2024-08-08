@@ -70,3 +70,5 @@ Route::get('/privacy', function () {
 Route::get('/terms', function () {
     return view('terms');
 })->name('terms');
+
+Route::get('/advertisements/{id}', [AdvertisementController::class, 'show'])->name('advertisements.show');
