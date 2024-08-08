@@ -12,7 +12,7 @@ class HomeController extends Controller
     public function index()
     {
         // Получаем последние объявления
-        $advertisements = Advertisement::where('is_active', true)->latest()->get();
+        $advertisements = Advertisement::where('is_active', true)->latest()->paginate(10);
 
         // Передаем переменную в представление
         return view('home', [

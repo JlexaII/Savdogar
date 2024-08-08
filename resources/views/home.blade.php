@@ -39,5 +39,9 @@
                 </div>
             @endforeach
         </div>
+        <!-- Пагинация -->
+        <div class="mt-4">
+            {{ $advertisements->links('pagination::bootstrap-5') }}
+        </div>
     </div>
 @endsection
