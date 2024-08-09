@@ -20,4 +20,11 @@ class Advertisement extends Model
     {
         return $this->belongsTo(Subcategory::class);
     }
+
+    // Связь с моделью User
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
+

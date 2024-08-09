@@ -10,7 +10,7 @@ class AdminDashboardController extends Controller
     public function index(Request $request)
     {
         // Фильтрация по дате
-        $query = Advertisement::query();
+        $query = Advertisement::with('user'); // Загрузка данных пользователя
 
         if ($request->has('start_date') && $request->has('end_date')) {
             $query->whereBetween('created_at', [$request->start_date, $request->end_date]);

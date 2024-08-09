@@ -1,4 +1,3 @@
-<!-- resources/views/inc/header.blade.php -->
 <nav class="navbar navbar-expand-lg navbar-light bg-primary-subtle shadow-lg border border-info-subtle border-bottom rounded sticky-top">
     <div class="container-fluid">
         <a href="/" class="d-flex align-items-center link-body-emphasis text-decoration-none">
@@ -15,7 +14,11 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Личный кабинет
+                        @auth
+                            {{ auth()->user()->name }} <!-- Имя пользователя -->
+                        @else
+                            Личный кабинет
+                        @endauth
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         @auth

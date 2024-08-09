@@ -32,6 +32,7 @@
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Пользователь</th> <!-- Новый столбец -->
                         <th>Заголовок</th>
                         <th>Описание</th>
                         <th>Фото</th>
@@ -44,6 +45,7 @@
                     @forelse ($advertisements as $advertisement)
                         <tr>
                             <td>{{ $advertisement->id }}</td>
+                            <td>{{ optional($advertisement->user)->name ?? 'Пользователь не найден' }}</td> <!-- Имя пользователя -->
                             <td>{{ $advertisement->title }}</td>
                             <td>{{ Str::limit($advertisement->description, 50) }}</td>
                             <td>
@@ -98,7 +100,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7">Нет объявлений.</td>
+                            <td colspan="8">Нет объявлений.</td>
                         </tr>
                     @endforelse
                 </tbody>
