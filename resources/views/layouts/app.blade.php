@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
@@ -28,12 +28,12 @@
 <body class="bg-dark-blue text-light">
     <div class="d-flex flex-column min-vh-100">
         <!-- Header -->
-        <header class="bg-info p-3 shadow-sm fixed-top w-100">
+        <header class="bg-info p-1 shadow-sm fixed-top w-100">
             @include('inc.header')
         </header>
 
         <!-- Sidebar Toggle Button (Visible on Mobile) -->
-        <button class="btn btn-primary d-md-none position-fixed bottom-0 start-0 m-3" type="button"
+        <button class="btn btn-primary d-md-none position-fixed bottom-0 start-0 m-1" type="button"
             data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -55,7 +55,7 @@
         <div class="container-fluid flex-fill pt-5 mt-5">
             <div class="row">
                 <!-- Sidebar -->
-                <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-secondary sidebar pt-5 d-none d-md-block">
+                <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-secondary sidebar pt-1 d-none d-md-block">
                     @include('inc.aside')
                 </nav>
 
@@ -63,7 +63,7 @@
                 <main
                     class="col-md-9 ms-sm-auto col-lg-10 px-md-4 offset-md-3 offset-lg-2 bg-light text-dark p-4 rounded shadow">
                     @if (Request::is('/'))
-                        <section class="bg-primary text-white py-5 mb-4 rounded">
+                        <section class="bg-primary text-white py-1 mb-1 rounded">
                             @include('inc.hero')
                         </section>
                     @endif

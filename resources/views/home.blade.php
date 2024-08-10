@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="container mt-5">
-        <h2>Последние объявления</h2>
+        <h6>Последние объявления</h6>
         <!-- Контейнер для динамического обновления списка объявлений -->
         <div id="advertisements-container" class="row">
             @foreach ($advertisements as $advertisement)
