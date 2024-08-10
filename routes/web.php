@@ -10,6 +10,7 @@ use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\UserController;
 
 // Стандартные маршруты для аутентификации
 Auth::routes();
@@ -28,6 +29,9 @@ Route::middleware('auth')->group(function () {
     Route::post('admin/dashboard/{id}/rework', [AdminDashboardController::class, 'rework'])->name('admin.dashboard.rework');
     Route::delete('admin/dashboard/{id}/destroy', [AdminDashboardController::class, 'destroy'])->name('admin.dashboard.destroy');
 });
+
+Route::delete('/account/delete', [UserController::class, 'destroy'])->name('account.delete');
+
 
 // Ресурсные маршруты для новостей
 Route::resource('news', NewsController::class);
