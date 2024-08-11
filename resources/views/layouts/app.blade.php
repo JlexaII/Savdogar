@@ -22,6 +22,8 @@
         integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM1HiJfD7FQbDYI1xFjQsW5C1OfVo2ruGn4zHb5" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- Подключаем Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 
 
@@ -99,7 +101,8 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
+    <!-- Подключаем Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </body>
 
 </html>
@@ -215,4 +218,102 @@
     gtag('js', new Date());
 
     gtag('config', 'G-PW2K75RTZ5');
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var map, marker;
+
+    // Функция инициализации карты
+    function initMap(lat, lon, zoomLevel = 13) {
+        map = L.map('map').setView([lat, lon], zoomLevel);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        marker = L.marker([lat, lon], {
+            draggable: !isViewMode // Если режим просмотра, отключаем перетаскивание маркера
+        }).addTo(map);
+
+        // Обновление координат и адреса при перетаскивании маркера (только в режиме редактирования)
+        if (!isViewMode) {
+            marker.on('dragend', function(e) {
+                var latlng = marker.getLatLng();
+                document.getElementById('latitude').value = latlng.lat;
+                document.getElementById('longitude').value = latlng.lng;
+
+                // Обратное геокодирование для обновления адреса
+                fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latlng.lat}&lon=${latlng.lng}&format=json`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data && data.display_name) {
+                            document.getElementById('address').value = data.display_name;
+                        } else {
+                            document.getElementById('address').value = 'Адрес не найден';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Ошибка при обратном геокодировании:', error);
+                    });
+            });
+        }
+    }
+
+    // Определение режима (создание, редактирование или просмотр)
+    var isEditMode = document.getElementById('latitude').value && document.getElementById('longitude').value;
+    var isViewMode = !!document.getElementById('address').readOnly;
+
+    if (isEditMode || isViewMode) {
+        // Режим редактирования или просмотра
+        var latitude = parseFloat(document.getElementById('latitude').value);
+        var longitude = parseFloat(document.getElementById('longitude').value);
+        initMap(latitude, longitude);
+
+        // Если режим редактирования, можно изменить координаты
+        if (isEditMode) {
+            document.getElementById('address').addEventListener('change', function() {
+                // Геокодирование адреса
+                var address = this.value;
+                fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json&limit=1`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data && data.length > 0) {
+                            var lat = parseFloat(data[0].lat);
+                            var lon = parseFloat(data[0].lon);
+                            map.setView([lat, lon], 13);
+                            marker.setLatLng([lat, lon]);
+                            document.getElementById('latitude').value = lat;
+                            document.getElementById('longitude').value = lon;
+                        } else {
+                            alert('Адрес не найден');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Ошибка при геокодировании:', error);
+                    });
+            });
+        }
+    } else {
+        // Режим создания
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var lat = position.coords.latitude;
+                var lon = position.coords.longitude;
+                document.getElementById('latitude').value = lat;
+                document.getElementById('longitude').value = lon;
+                initMap(lat, lon);
+            }, function() {
+                // При отказе от доступа к местоположению по умолчанию Москва
+                initMap(55.7558, 37.6173);
+                document.getElementById('address').value = "Москва";
+            });
+        } else {
+            // Если геолокация не поддерживается, по умолчанию Москва
+            initMap(55.7558, 37.6173);
+            document.getElementById('address').value = "Москва";
+        }
+    }
+});
+
 </script>

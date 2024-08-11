@@ -56,13 +56,21 @@
                 @enderror
             </div>
 
-            <!-- Адрес -->
-            <div class="mb-3">
+             <!-- Адрес -->
+             <div class="mb-3">
                 <label for="address" class="form-label">Адрес</label>
                 <input type="text" name="address" id="address" class="form-control" value="{{ old('address', $advertisement->address) }}">
                 @error('address')
                     <div class="text-danger mt-2">{{ $message }}</div>
                 @enderror
+            </div>
+
+            <!-- Карта -->
+            <div class="mb-3">
+                <label for="map" class="form-label">Местоположение на карте</label>
+                <div id="map" style="height: 400px; width: 100%;"></div>
+                <input type="hidden" name="latitude" id="latitude" value="{{ old('latitude', $advertisement->latitude) }}">
+                <input type="hidden" name="longitude" id="longitude" value="{{ old('longitude', $advertisement->longitude) }}">
             </div>
 
             <!-- Цена -->

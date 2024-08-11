@@ -8,21 +8,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class AdvertisementController extends Controller
 {
-    // Конструктор для применения middleware аутентификации
     public function __construct()
     {
         $this->middleware('auth')->except('show');
     }
 
-    // Отображение списка объявлений
+    // Отображение списка объявлений текущего пользователя
     public function index()
     {
         $user = Auth::user();
 
-        // Проверка, что пользователь аутентифицирован
         if ($user) {
             $advertisements = Advertisement::where('user_id', $user->id)->get();
             $categoryId = 1; // Установите ID категории или получите его из запроса
@@ -31,7 +30,6 @@ class AdvertisementController extends Controller
                 'categoryId' => $categoryId
             ]);
         } else {
-            // Перенаправление на страницу входа, если пользователь не аутентифицирован
             return redirect()->route('login')->with('error', 'Вы должны быть аутентифицированы для доступа к этой странице.');
         }
     }
@@ -64,6 +62,8 @@ class AdvertisementController extends Controller
             'description' => 'required|string',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'address' => 'nullable|string|max:255',
+            'latitude' => 'nullable|numeric',
+            'longitude' => 'nullable|numeric',
             'phone' => 'required|string|max:20',
             'square_meters' => 'nullable|numeric',
             'car_description' => 'nullable|string|max:255',
@@ -73,7 +73,7 @@ class AdvertisementController extends Controller
         ]);
 
         $validated['is_active'] = 0; // Устанавливаем значение по умолчанию для нового объявления
-        $validated['user_id'] = auth()->id(); // Добавьте user_id
+        $validated['user_id'] = auth()->id(); // Добавляем user_id
 
         // Обработка изображений
         if ($request->hasFile('images')) {
@@ -89,9 +89,9 @@ class AdvertisementController extends Controller
         return redirect()->route('advertisements.index')->with('success', 'Объявление создано успешно');
     }
 
+    // Метод для отображения объявлений по подкатегории
     public function showSubcategory($categoryId, $subcategoryId)
     {
-        // Получаем одобренные объявления по подкатегории
         $advertisements = Advertisement::where('subcategory_id', $subcategoryId)
             ->where('is_active', 1) // Фильтрация по статусу "одобрен"
             ->get();
@@ -104,7 +104,6 @@ class AdvertisementController extends Controller
     // Форма для редактирования объявления
     public function edit(Advertisement $advertisement)
     {
-        // Проверка на права доступа
         if (Auth::user()->id != $advertisement->user_id) {
             return redirect()->route('advertisements.index')->with('error', 'У вас нет прав для редактирования этого объявления.');
         }
@@ -116,7 +115,6 @@ class AdvertisementController extends Controller
     // Обновление объявления
     public function update(Request $request, Advertisement $advertisement)
     {
-        // Проверка на права доступа
         if (Auth::user()->id != $advertisement->user_id) {
             return redirect()->route('advertisements.index')->with('error', 'У вас нет прав для обновления этого объявления.');
         }
@@ -126,6 +124,8 @@ class AdvertisementController extends Controller
             'description' => 'required|string',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'address' => 'nullable|string|max:255',
+            'latitude' => 'nullable|numeric',
+            'longitude' => 'nullable|numeric',
             'phone' => 'required|string|max:20',
             'square_meters' => 'nullable|numeric',
             'car_description' => 'nullable|string|max:255',
@@ -134,12 +134,7 @@ class AdvertisementController extends Controller
         ]);
 
         // Логирование для отладки
-        if ($request->hasFile('images')) {
-            Log::info('Файлы загружаются');
-            Log::info($request->file('images'));
-        } else {
-            Log::info('Файлы не загружаются');
-        }
+        Log::info($request->file('images') ? 'Файлы загружаются' : 'Файлы не загружаются');
 
         // Обработка изображений
         if ($request->hasFile('images')) {
@@ -164,18 +159,36 @@ class AdvertisementController extends Controller
         return redirect()->route('advertisements.index')->with('success', 'Объявление обновлено успешно');
     }
 
-    // app/Http/Controllers/AdvertisementController.php
+    // Отображение объявления
     public function show($id)
     {
         $advertisement = Advertisement::findOrFail($id);
-        return view('advertisements.show', compact('advertisement'));
-    }
 
+        // Находим подкатегорию текущего объявления
+        $subcategoryId = $advertisement->subcategory_id;
+        
+        // Находим категорию по подкатегории
+        $categoryId = DB::table('subcategories')
+            ->where('id', $subcategoryId)
+            ->value('category_id');
+
+        // Найти похожие объявления (по той же категории)
+        $similarAds = Advertisement::where('subcategory_id', '!=', $subcategoryId)
+            ->whereHas('subcategory', function ($query) use ($categoryId) {
+                $query->where('category_id', $categoryId);
+            })
+            ->where('id', '!=', $advertisement->id)
+            ->inRandomOrder()
+            ->take(12)
+            ->get()
+            ->chunk(4); // разбиваем на группы по 4 объявления
+
+        return view('advertisements.show', compact('advertisement', 'similarAds'));
+    }
 
     // Удаление объявления
     public function destroy(Advertisement $advertisement)
     {
-        // Проверка на права доступа
         if (Auth::user()->id != $advertisement->user_id) {
             return redirect()->route('advertisements.index')->with('error', 'У вас нет прав для удаления этого объявления.');
         }

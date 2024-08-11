@@ -16,24 +16,26 @@
                             @if ($advertisement->images)
                                 @foreach (json_decode($advertisement->images) as $image)
                                     <img src="{{ asset('storage/' . $image) }}" alt="{{ $advertisement->title }}"
-                                        class="img-fluid d-block mx-auto" style="max-height: 300px; object-fit: cover;">
+                                        class="img-fluid d-block mx-auto" style="max-height: 200px; object-fit: cover;">
                                 @endforeach
                             @endif
                         </div>
-                        <div class="card-body">
+                        <div class="card-body p-2">
                             @if ($advertisement->description)
-                                <p class="card-text">{{ Str::limit($advertisement->description, 100) }}</p>
+                                <p class="card-text mb-1">{{ Str::limit($advertisement->description, 80) }}</p>
                             @endif
                             @if ($advertisement->price)
-                                <p class="card-text">Цена: {{ Str::limit($advertisement->price, 100) }}</p>
+                                <p class="card-text mb-1">Цена: {{ $advertisement->price }}</p>
                             @endif
                             @if ($advertisement->phone)
-                                <p class="card-text">Телефон: {{ Str::limit($advertisement->phone, 100) }}</p>
+                                <p class="card-text mb-1">Телефон: {{ $advertisement->phone }}</p>
                             @endif
                         </div>
-                        <div class="card-footer">
-                            <small class="text-muted">{{ $advertisement->created_at->format('d.m.Y') }}</small>
-                            <a href="{{ route('advertisements.show', $advertisement->id) }}" class="btn btn-primary">Подробнее</a>
+                        <div class="card-footer p-2">
+                            <small class="text-muted">
+                                <strong>Дата публикации:</strong> {{ $advertisement->created_at->format('d.m.Y H:i') }}
+                            </small>
+                            <a href="{{ route('advertisements.show', $advertisement->id) }}" class="btn btn-primary btn-sm">Подробнее</a>
                         </div>
                     </div>
                 </div>

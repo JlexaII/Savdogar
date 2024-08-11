@@ -77,11 +77,22 @@
             <input type="file" id="images" name="images[]" class="form-control" multiple>
         </div>
 
-        {{--  <!-- Поле для ввода дополнительной информации, если нужно -->
-        <div class="form-group">
-            <label for="additional_info">Дополнительная информация</label>
-            <textarea id="additional_info" name="additional_info" class="form-control" rows="3"></textarea>
-        </div> --}}
+        <!-- Адрес -->
+        <div class="mb-3">
+            <label for="address" class="form-label">Адрес</label>
+            <input type="text" name="address" id="address" class="form-control" value="{{ old('address') }}">
+            @error('address')
+                <div class="text-danger mt-2">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <!-- Карта -->
+        <div class="mb-3">
+            <label for="map" class="form-label">Местоположение на карте</label>
+            <div id="map" style="height: 400px; width: 100%;"></div>
+            <input type="hidden" name="latitude" id="latitude" value="{{ old('latitude', '55.7558') }}">
+            <input type="hidden" name="longitude" id="longitude" value="{{ old('longitude', '37.6173') }}">
+        </div>
 
         <button type="submit" class="btn btn-primary">Создать объявление</button>
     </form>

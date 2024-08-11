@@ -28,8 +28,3 @@
     <label for="phone">Телефон</label>
     <input type="text" id="phone" name="phone" class="form-control" value="{{ old('phone') }}" required>
 </div>
-
-<div class="form-group">
-    <label for="address">Местоположение адрес недвижимости</label>
-    <input type="text" id="address" name="address" class="form-control" value="{{ old('address') }}" required>
-</div>
