@@ -1,10 +1,10 @@
 {{-- resources/views/advertisements/partials/form_real_estate.blade.php --}}
 <div class="form-group">
-    <label for="property_type">Тип недвижимости</label>
+    <label for="property_type">{{ __('messages.trs') }}</label>
     <select id="property_type" name="title" class="form-control" required>
-        <option value="Квартира">Квартира</option>
-        <option value="Дом">Дом</option>
-        <option value="Участок">Участок</option>
+        <option value="{{ __('messages.kvrt') }}">{{ __('messages.kvrt') }}</option>
+        <option value="{{ __('messages.dom') }}">{{ __('messages.dom') }}</option>
+        <option value="{{ __('messages.uchastok') }}">{{ __('messages.uchastok') }}</option>
     </select>
 </div>
 
