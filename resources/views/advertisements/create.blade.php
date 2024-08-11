@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Создать объявление в категории "{{ $category->name }}"</h1>
+    <h1>{{ __('messages.crob') }} "{{ __('categories.' . $category->name) }}"</h1>
     <form action="{{ route('advertisements.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
@@ -12,11 +12,11 @@
 
         <!-- Поле для выбора субкатегории -->
         <div class="form-group">
-            <label for="subcategory_id">Субкатегория</label>
+            <label for="subcategory_id">{{ __('messages.crob1') }}</label>
             <select id="subcategory_id" name="subcategory_id" class="form-control" required>
-                <option value="">Выберите субкатегорию</option>
+                <option value="">{{ __('messages.crob2') }}</option>
                 @foreach ($category->subcategories as $subcategory)
-                    <option value="{{ $subcategory->id }}">{{ $subcategory->name }}</option>
+                    <option value="{{ $subcategory->id }}">{{ __('categories.' . $subcategory->name) }}</option>
                 @endforeach
             </select>
         </div>
@@ -68,18 +68,18 @@
             @break
 
             @default
-                <p>Выберите категорию.</p>
+                <p>{{ __('messages.crob3') }}.</p>
         @endswitch
 
         <!-- Поле для загрузки изображений -->
         <div class="form-group">
-            <label for="images">Загрузите изображения</label>
+            <label for="images">{{ __('messages.imgload') }}</label>
             <input type="file" id="images" name="images[]" class="form-control" multiple>
         </div>
 
         <!-- Адрес -->
         <div class="mb-3">
-            <label for="address" class="form-label">Адрес</label>
+            <label for="address" class="form-label">{{ __('messages.address') }}</label>
             <input type="text" name="address" id="address" class="form-control" value="{{ old('address') }}">
             @error('address')
                 <div class="text-danger mt-2">{{ $message }}</div>
@@ -88,13 +88,13 @@
 
         <!-- Карта -->
         <div class="mb-3">
-            <label for="map" class="form-label">Местоположение на карте</label>
+            <label for="map" class="form-label">{{ __('messages.locate') }}</label>
             <div id="map" style="height: 400px; width: 100%;"></div>
             <input type="hidden" name="latitude" id="latitude" value="{{ old('latitude', '55.7558') }}">
             <input type="hidden" name="longitude" id="longitude" value="{{ old('longitude', '37.6173') }}">
         </div>
 
-        <button type="submit" class="btn btn-primary">Создать объявление</button>
+        <button type="submit" class="btn btn-primary">{{ __('messages.create') }}</button>
     </form>
 @endsection
 

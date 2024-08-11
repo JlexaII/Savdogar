@@ -76,3 +76,11 @@ Route::get('/terms', function () {
 })->name('terms');
 
 Route::get('/advertisements/{id}', [AdvertisementController::class, 'show'])->name('advertisements.show');
+
+// Для смены языка
+Route::get('lang/{locale}', function ($locale) {
+    if (in_array($locale, ['en', 'ru', 'uz'])) {
+        session(['locale' => $locale]);
+    }
+    return redirect()->back();
+})->name('lang.switch');

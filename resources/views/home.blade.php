@@ -1,12 +1,11 @@
 @extends('layouts.app')
 
 @section('title-block')
-    Добро пожаловать на сайт объявлений AMS!
+{{ __('messages.welcome') }}
 @endsection
 
 @section('content')
     <div class="container mt-5">
-        <h6>Последние объявления</h6>
         <!-- Контейнер для динамического обновления списка объявлений -->
         <div id="advertisements-container" class="row">
             @foreach ($advertisements as $advertisement)
@@ -25,17 +24,17 @@
                                 <p class="card-text mb-1">{{ Str::limit($advertisement->description, 80) }}</p>
                             @endif
                             @if ($advertisement->price)
-                                <p class="card-text mb-1">Цена: {{ $advertisement->price }}</p>
+                                <p class="card-text mb-1">{{ __('messages.price') }}: {{ $advertisement->price }}</p>
                             @endif
                             @if ($advertisement->phone)
-                                <p class="card-text mb-1">Телефон: {{ $advertisement->phone }}</p>
+                                <p class="card-text mb-1">{{ __('messages.tel') }}: {{ $advertisement->phone }}</p>
                             @endif
                         </div>
                         <div class="card-footer p-2">
                             <small class="text-muted">
-                                <strong>Дата публикации:</strong> {{ $advertisement->created_at->format('d.m.Y H:i') }}
+                                <strong>{{ __('messages.timepub') }}:</strong> {{ $advertisement->created_at->format('d.m.Y H:i') }}
                             </small>
-                            <a href="{{ route('advertisements.show', $advertisement->id) }}" class="btn btn-primary btn-sm">Подробнее</a>
+                            <a href="{{ route('advertisements.show', $advertisement->id) }}" class="btn btn-primary btn-sm">{{ __('messages.op') }}</a>
                         </div>
                     </div>
                 </div>
