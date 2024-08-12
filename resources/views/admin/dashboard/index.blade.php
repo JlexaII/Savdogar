@@ -1,5 +1,5 @@
 @extends('layouts.app')
- 
+
 @section('content')
     <div class="container mt-5">
         <h4>Все объявления</h4>
@@ -32,12 +32,45 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Пользователь</th> <!-- Новый столбец -->
-                        <th>Заголовок</th>
+                        <th>Пользователь</th>
+                        <th>
+                            Заголовок
+                            <a href="{{ route('admin.dashboard.index', array_merge(request()->all(), ['sort_by' => 'title', 'sort_order' => request('sort_order') == 'asc' ? 'desc' : 'asc'])) }}" class="btn btn-sm btn-link">
+                                @if(request('sort_by') == 'title')
+                                    @if(request('sort_order') == 'asc')
+                                        <i class="bi bi-arrow-up"></i>
+                                    @else
+                                        <i class="bi bi-arrow-down"></i>
+                                    @endif
+                                @endif
+                            </a>
+                        </th>
                         <th>Описание</th>
                         <th>Фото</th>
-                        <th>Дата создания</th>
-                        <th>Статус</th>
+                        <th>
+                            Дата создания
+                            <a href="{{ route('admin.dashboard.index', array_merge(request()->all(), ['sort_by' => 'created_at', 'sort_order' => request('sort_order') == 'asc' ? 'desc' : 'asc'])) }}" class="btn btn-sm btn-link">
+                                @if(request('sort_by') == 'created_at')
+                                    @if(request('sort_order') == 'asc')
+                                        <i class="bi bi-arrow-up"></i>
+                                    @else
+                                        <i class="bi bi-arrow-down"></i>
+                                    @endif
+                                @endif
+                            </a>
+                        </th>
+                        <th>
+                            Статус
+                            <a href="{{ route('admin.dashboard.index', array_merge(request()->all(), ['sort_by' => 'is_active', 'sort_order' => request('sort_order') == 'asc' ? 'desc' : 'asc'])) }}" class="btn btn-sm btn-link">
+                                @if(request('sort_by') == 'is_active')
+                                    @if(request('sort_order') == 'asc')
+                                        <i class="bi bi-arrow-up"></i>
+                                    @else
+                                        <i class="bi bi-arrow-down"></i>
+                                    @endif
+                                @endif
+                            </a>
+                        </th>
                         <th>Действия</th>
                     </tr>
                 </thead>
@@ -45,7 +78,7 @@
                     @forelse ($advertisements as $advertisement)
                         <tr>
                             <td>{{ $advertisement->id }}</td>
-                            <td>{{ optional($advertisement->user)->name ?? 'Пользователь не найден' }}</td> <!-- Имя пользователя -->
+                            <td>{{ optional($advertisement->user)->name ?? 'Пользователь не найден' }}</td>
                             <td>{{ $advertisement->title }}</td>
                             <td>{{ Str::limit($advertisement->description, 50) }}</td>
                             <td>

@@ -9,11 +9,20 @@ class AdminDashboardController extends Controller
 {
     public function index(Request $request)
     {
-        // Фильтрация по дате
-        $query = Advertisement::with('user'); // Загрузка данных пользователя
+        // Начальный запрос с загрузкой пользователя
+        $query = Advertisement::with('user');
 
+        // Фильтрация по дате
         if ($request->has('start_date') && $request->has('end_date')) {
             $query->whereBetween('created_at', [$request->start_date, $request->end_date]);
+        }
+
+        // Сортировка
+        if ($request->has('sort_by') && $request->has('sort_order')) {
+            $query->orderBy($request->get('sort_by'), $request->get('sort_order'));
+        } else {
+            // По умолчанию сортировка по дате создания
+            $query->orderBy('created_at', 'desc');
         }
 
         // Пагинация
