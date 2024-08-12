@@ -1,37 +1,37 @@
 @extends('layouts.app')
 
 @section('title-block')
-    Вход в систему
+{{ __('login.enter') }}
 @endsection
 
 @section('content')
     <div class="d-flex flex-column justify-content-center align-items-center flex-grow-1">
         <div class="form-container">
-            <h2 class="text-center mb-4">Вход</h2>
+            <h2 class="text-center mb-4">{{ __('login.login') }}</h2>
             <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <div class="mb-3">
-                    <label for="email" class="form-label">Электронная почта</label>
+                    <label for="email" class="form-label">{{ __('login.emal') }}</label>
                     <input type="email" class="form-control" name="email" id="email" required>
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label">Пароль</label>
+                    <label for="password" class="form-label">{{ __('login.pass') }}</label>
                     <input type="password" class="form-control" name="password" id="password" required>
                 </div>
                 <div class="mb-3">
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" name="remember" id="remember">
-                        <label class="form-check-label" for="remember">Запомнить меня</label>
+                        <label class="form-check-label" for="remember">{{ __('login.zapom') }}</label>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Войти</button>
+                <button type="submit" class="btn btn-primary w-100">{{ __('login.enter') }}</button>
             </form>
-            <a href="{{ url('auth/google') }}" class="btn social-button social-google mt-3">Войти с помощью Google</a>
-            <a href="{{ url('auth/facebook') }}" class="btn social-button social-facebook mt-2">Войти с помощью Facebook</a>
-            <a href="{{ url('auth/yandex') }}" class="btn social-button social-yandex mt-2">Войти через Яндекс</a>
+            <a href="{{ url('auth/google') }}" class="btn social-button social-google mt-3">{{ __('login.goog') }}</a>
+            <a href="{{ url('auth/facebook') }}" class="btn social-button social-facebook mt-2">{{ __('login.face') }}</a>
+            <a href="{{ url('auth/yandex') }}" class="btn social-button social-yandex mt-2">{{ __('login.yan') }}</a>
 
-            <a href="{{ route('password.request') }}" class="btn btn-link d-block text-center mt-3">Забыли пароль?</a>
-            <a href="{{ route('register') }}" class="btn btn-link d-block text-center mt-3">Нет аккаунта? Зарегистрироваться</a>
+            <a href="{{ route('password.request') }}" class="btn btn-link d-block text-center mt-3">{{ __('login.zabil') }}</a>
+            <a href="{{ route('register') }}" class="btn btn-link d-block text-center mt-3">{{ __('login.nacc') }}</a>
         </div>
     </div>
 
