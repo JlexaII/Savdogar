@@ -58,6 +58,7 @@ return [
     'mark' => 'Markasi',
     'gvip' => 'Chiqarilgan yili',
     'nwork' => 'Lavozim',
+    'tpoh' => 'O\'xshash e\'lonlar',
 
     'company' => 'Kompaniya haqida',
     'right' => 'Barcha huquqlar himoyalangan',

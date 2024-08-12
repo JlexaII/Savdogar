@@ -17,10 +17,10 @@
                     @endif
                 </div>
                 <p class="card-text">{{ $advertisement->description }}</p>
-                <p class="card-text"><strong>Цена:</strong> {{ $advertisement->price }}</p>
-                <p class="card-text"><strong>Телефон:</strong> {{ $advertisement->phone }}</p>
+                <p class="card-text"><strong>{{ __('messages.price') }}:</strong> {{ $advertisement->price }}</p>
+                <p class="card-text"><strong>{{ __('messages.tel') }}:</strong> {{ $advertisement->phone }}</p>
                 <p class="card-text mt-3 text-muted">
-                    <strong>Дата публикации:</strong> {{ $advertisement->created_at->format('d.m.Y H:i') }}
+                    <strong>{{ __('messages.timepub') }}:</strong> {{ $advertisement->created_at->format('d.m.Y H:i') }}
                 </p>
             </div>
 
@@ -33,7 +33,7 @@
 
                 <!-- Адрес -->
                 <div class="mt-3">
-                    <p class="card-text"><strong>Адрес:</strong> {{ $advertisement->address }}</p>
+                    <p class="card-text"><strong>{{ __('messages.address') }}:</strong> {{ $advertisement->address }}</p>
                     <input type="hidden" name="address" id="address" class="form-control"
                         value="{{ old('address', $advertisement->address) }}" readonly>
                     @error('address')
@@ -45,7 +45,7 @@
 
         <!-- Другие объявления из этой категории (Карусель) -->
         <div class="mt-5">
-            <h3>Похожие объявления</h3>
+            <h3>{{ __('messages.tpoh') }}</h3>
             <div id="similarAdsCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     @foreach ($similarAds as $index => $similarAd)
@@ -60,7 +60,7 @@
                                                 <h5 class="card-title">{{ $ad->title }}</h5>
                                                 <p class="card-text">{{ Str::limit($ad->description, 50) }}</p>
                                                 <a href="{{ route('advertisements.show', $ad->id) }}"
-                                                    class="btn btn-link">Подробнее</a>
+                                                    class="btn btn-link">{{ __('messages.op') }}</a>
                                                 <p class="card-text mt-2 text-muted">
                                                     {{ $ad->created_at->format('d.m.Y H:i') }}
                                                 </p>

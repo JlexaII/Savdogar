@@ -2,19 +2,19 @@
 
 @section('content')
     <div class="container mt-5">
-        <h1 class="mb-4">Список объявлений</h1>
+        <h1 class="mb-4">{{ __('index.text') }}</h1>
 
-        <a href="{{ route('categories.index') }}" class="btn btn-primary mb-3">Создать новое объявление</a>
+        <a href="{{ route('categories.index') }}" class="btn btn-primary mb-3">{{ __('index.text2') }}</a>
 
         <div class="table-responsive">
             <table class="table table-bordered table-striped table-hover">
                 <thead class="thead-dark">
                     <tr>
-                        <th>Заголовок</th>
-                        <th>Описание</th>
-                        <th>Изображения</th>
-                        <th>Статус</th>
-                        <th>Действия</th>
+                        <th>{{ __('index.text3') }}</th>
+                        <th>{{ __('messages.opis') }}</th>
+                        <th>{{ __('index.text4') }}</th>
+                        <th>{{ __('index.text5') }}</th>
+                        <th>{{ __('index.text6') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,11 +32,11 @@
                             </td>
                             <td>
                                 @if ($advertisement->is_active == 0)
-                                    <span class="badge bg-warning">На доработку</span>
+                                    <span class="badge bg-warning">{{ __('index.text7') }}</span>
                                 @elseif ($advertisement->is_active == 1)
-                                    <span class="badge bg-success">Одобрено</span>
+                                    <span class="badge bg-success">{{ __('index.text8') }}</span>
                                 @elseif ($advertisement->is_active == 2)
-                                    <span class="badge bg-secondary">Нуждается в доработке</span>
+                                    <span class="badge bg-secondary">{{ __('index.text9') }}</span>
                                 @endif
                             </td>
                             <td>
@@ -55,7 +55,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5">У вас нет объявлений.</td>
+                            <td colspan="5">{{ __('index.text10') }}</td>
                         </tr>
                     @endforelse
                 </tbody>

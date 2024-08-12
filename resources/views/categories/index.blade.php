@@ -2,15 +2,15 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Выберите категорию для размещения объявления</h1>
+    <h1>{{ __('increate.text') }}</h1>
     <div class="container">
         <div class="row">
             @foreach ($categories as $category)
                 <div class="col-md-4">
                     <a href="{{ route('advertisements.create', $category->id) }}" class="d-block text-center mb-4 category-link">
                         <div class="icon-container">
-                            <img src="{{ asset('images/icons/' . $category->icon) }}" alt="{{ $category->name }}" class="img-fluid">
-                            <p>{{ $category->name }}</p>
+                            <img src="{{ asset('images/icons/' . $category->icon) }}" alt="{{ __('categories.' . $category->name) }}" class="img-fluid">
+                            <p>{{ __('categories.' . $category->name) }}</p>
                         </div>
                     </a>
                 </div>

@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description"
-        content="Размещайте бесплатные объявления на AMS. Легко продайте или найдите нужное среди тысяч предложений по недвижимости, транспорту, личным вещам и многому другому.">
+        content="{{ __('metadis.text') }}">
     <meta name="robots" content="index, follow">
     <meta name="description"
-        content="Открылся новый сайт для бесплатных объявлений. Разместите свои предложения в различных категориях быстро и легко. Бесплатное размещение и удобный интерфейс.">
+        content="{{ __('metadis.text2') }}">
     <meta name="description"
-        content="Расширение возможностей сайта для бесплатных объявлений. Новые категории для размещения объявлений. Бесплатное размещение и удобный поиск.">
+        content="{{ __('metadis.text3') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url('/') }}/css/style.css">
     <link rel="icon" href="{{ asset('amshold.ico') }}" type="image/x-icon">
-    <title>@yield('title-block', 'Бесплатные объявления на AMS')</title>
+    <title>@yield('title-block', __('index.titles'))</title>
     <link rel="canonical" href="https://www.amshold.ru">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM1HiJfD7FQbDYI1xFjQsW5C1OfVo2ruGn4zHb5" crossorigin="anonymous">
@@ -89,10 +89,9 @@
     <div id="cookieConsent" class="alert alert-dark position-fixed bottom-0 w-100 m-0 text-center" role="alert"
         style="display: none;">
         <div class="container d-flex justify-content-between align-items-center">
-            <p class="mb-0">Мы используем файлы cookie для улучшения работы нашего сайта. Продолжая использовать сайт,
-                вы соглашаетесь с нашей <a href="{{ route('privacy') }}"
-                    class="text-white text-decoration-underline">политикой использования файлов cookie</a>.</p>
-            <button id="acceptCookies" class="btn btn-primary">Принять</button>
+            <p class="mb-0">{{ __('coockes.text1') }} <a href="{{ route('privacy') }}"
+                    class="text-white text-decoration-underline">{{ __('coockes.text2') }}</a>.</p>
+            <button id="acceptCookies" class="btn btn-primary">{{ __('coockes.text3') }}</button>
         </div>
     </div>
     <script src="{{ asset('js/cookieConsent.js') }}"></script>

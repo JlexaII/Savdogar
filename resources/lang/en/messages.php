@@ -58,6 +58,7 @@ return [
     'mark' => 'Brand',
     'gvip' => 'Year of issue',
     'nwork' => 'Title of the work',
+    'tpoh' => 'Similar ads',
 
     'company' => 'About the company',
     'right' => 'All rights reserved',
